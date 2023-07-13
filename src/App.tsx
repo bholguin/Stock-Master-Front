@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, useNavigate } from 'react-router-dom';
+import { FC } from 'react';
+import { AuthStore } from './stores/auth-store';
+import { observer } from 'mobx-react';
+import { AppRoutes } from 'routes';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+type Props = {
+  authStore: AuthStore
 }
+
+const App: FC = () => {
+  const authStore = new AuthStore(useNavigate)
+  return <Application authStore={authStore} />
+
+}
+
+
+const Application: FC<Props> = observer((props) => {
+
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  )
+
+})
+
 
 export default App;
