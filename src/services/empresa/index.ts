@@ -1,5 +1,5 @@
 import autobind from "autobind-decorator";
-import { AxiosInterceptor } from "config/axios";
+import axios from "axios";
 
 export interface IEmpresa {
     direccion: string
@@ -12,12 +12,8 @@ export interface IEmpresa {
 @autobind
 export class EmpresaServices {
 
-    constructor(
-        private readonly api: AxiosInterceptor
-    ) {}
-
     public async empresas_by_username(username: string) {
-        return await this.api.AxiosInstance({
+        return await axios({
             method: 'get',
             url: `/empresas_by_username`,
             params: {

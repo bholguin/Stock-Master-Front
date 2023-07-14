@@ -11,8 +11,8 @@ type Props = {
 export const Login: FC<Props> = observer((props) => {
 
     useEffect(() => {
-        props.store.testToken.run()
-    }, [props.store])
+      props.store.testToken.run()
+    }, [props.store.testToken])
 
     return (
         <Styled.Content>

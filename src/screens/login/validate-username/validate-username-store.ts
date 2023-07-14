@@ -2,9 +2,12 @@ import autobind from "autobind-decorator";
 import { NavigateFunction } from "react-router-dom";
 import { AsyncOperationStore } from "stores/AsyncOperation";
 import { EmpresaServices } from "services/empresa";
+import { HandlerError } from "utilities/handler-error/handler-error";
 
 @autobind
 export class ValidateUsernameStore {
+
+    private readonly _handlerError: HandlerError
 
     public readonly empresasByusername = new AsyncOperationStore(
         async (username: string) => {
@@ -17,7 +20,7 @@ export class ValidateUsernameStore {
                     }
                 })
             } catch (e: any) {
-
+                this._handlerError.takeError(e)
             }
         }
     )
@@ -26,6 +29,6 @@ export class ValidateUsernameStore {
         private readonly _navigate: NavigateFunction,
         private readonly _empresaService: EmpresaServices,
     ) {
-       
+       this._handlerError = new HandlerError(this._navigate)
     }
 }

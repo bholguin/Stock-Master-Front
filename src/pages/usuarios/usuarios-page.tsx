@@ -1,4 +1,3 @@
-import { AxiosInterceptor } from "config/axios"
 import { FC, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import { Usuarios, UsuariosStore } from "screens/usuarios"
@@ -8,17 +7,12 @@ export const UsuariosPage: FC = () => {
 
     const navigate = useNavigate()
 
-    const api = useMemo(() => new AxiosInterceptor(
-        navigate
-    ), [navigate])
-
-    const usuario = useMemo(() => new UsuarioServices(
-        api
-    ), [api])
+    const usuario = useMemo(() => new UsuarioServices(), [])
 
     const store = useMemo(() => new UsuariosStore(
-        usuario
-    ), [usuario])
+        usuario,
+        navigate
+    ), [usuario, navigate])
 
     return (
         <Usuarios store={store} />

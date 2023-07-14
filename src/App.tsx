@@ -1,22 +1,10 @@
-import { BrowserRouter, useNavigate } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { FC, Suspense } from 'react';
-import { AuthStore } from './stores/auth-store';
-import { observer } from 'mobx-react';
 import { AppRoutes } from 'routes';
+import { useAxiosConfig } from 'config/axios';
 
-type Props = {
-  authStore: AuthStore
-}
-
-const App: FC = () => {
-  const authStore = new AuthStore(useNavigate)
-  return <Application authStore={authStore} />
-
-}
-
-
-const Application: FC<Props> = observer((props) => {
-
+const App: FC = (() => {
+  useAxiosConfig()
   return (
     <BrowserRouter>
       <Suspense fallback={<div>Cargando...</div>}>
@@ -24,8 +12,6 @@ const Application: FC<Props> = observer((props) => {
       </Suspense>
     </BrowserRouter>
   )
-
 })
-
 
 export default App;

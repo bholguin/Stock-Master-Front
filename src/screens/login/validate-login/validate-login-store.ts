@@ -4,9 +4,12 @@ import { AsyncOperationStore } from "stores/AsyncOperation";
 import { LoginForm, ValidateLoginData } from "./interfaces";
 import { AuthServices } from "services/auth";
 import { ValueBoxStore } from "stores/ValueBox";
+import { HandlerError } from "utilities/handler-error/handler-error";
 
 @autobind
 export class ValidateLoginStore {
+
+    private readonly _handlerError: HandlerError
 
     private readonly _data = new ValueBoxStore<ValidateLoginData>({
         empresas: [],
@@ -24,7 +27,7 @@ export class ValidateLoginStore {
                 sessionStorage.setItem('app-token', response.data)
                 this._navigate('/home')
             } catch (e: any) {
-
+                this._handlerError.takeError(e)
             }
         }
     )
@@ -42,6 +45,8 @@ export class ValidateLoginStore {
         }else{
             this._navigate('/')
         }
+
+        this._handlerError = new HandlerError(this._navigate)
     }
 
     public goToRoot() {

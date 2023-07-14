@@ -1,5 +1,5 @@
 import autobind from "autobind-decorator";
-import { AxiosInterceptor } from "config/axios";
+import axios from "axios";
 
 export type Credentials = {
     username: string;
@@ -9,13 +9,8 @@ export type Credentials = {
 
 @autobind
 export class AuthServices {
-
-    constructor(
-        private readonly api: AxiosInterceptor
-    ) { }
-
     public async login(data: Credentials) {
-        return await this.api.AxiosInstance({
+        return await axios({
             method: 'post',
             url: '/login',
             data
