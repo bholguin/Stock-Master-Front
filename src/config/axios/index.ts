@@ -8,7 +8,8 @@ export class AxiosInterceptor {
   public AxiosInstance: AxiosStatic = axios
 
   constructor(
-    private readonly _navigate: NavigateFunction
+    private readonly _navigate: NavigateFunction,
+    private readonly _redirect401: boolean = true
   ) {
     this.AxiosInstance.defaults.baseURL = process.env.REACT_APP_API_URL;
     this.AxiosInstance.defaults.params = {};
@@ -34,7 +35,11 @@ export class AxiosInterceptor {
 
     switch (error.response.status) {
       case 401:
-        this._navigate('/')
+        if (this._redirect401) {
+          this._navigate('/')
+        }
+        break;
+      case 403:
         break;
       default:
 

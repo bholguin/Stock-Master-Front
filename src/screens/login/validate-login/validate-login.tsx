@@ -35,9 +35,6 @@ export const ValidateLogin: FC<Props> = observer((props) => {
                 <Styled.FabStyled onClick={goToRoot}>
                     <Styled.ArrowBackIconStyled />
                 </Styled.FabStyled>
-                <Styled.Title variant="body2">
-                    Inventario
-                </Styled.Title>
                 <InputTextForm
                     control={control}
                     name={'username'}
@@ -57,9 +54,9 @@ export const ValidateLogin: FC<Props> = observer((props) => {
                         required: 'campo requerido'
                     }}
                     inputProps={{
-                        children: data.empresas.map((item, index) => {
+                        children: data.empresas.map((item) => {
                             return (
-                                <Styled.Option key={index}>
+                                <Styled.Option key={`empresa-${item.id}`}>
                                     <Styled.FormControlLabelStyled value={item.id} control={<Styled.RadioStyled />} label={item.nombre} />
                                     <Styled.DomainIconStyled />
                                 </Styled.Option>

@@ -1,6 +1,5 @@
 import autobind from "autobind-decorator";
 import { AxiosInterceptor } from "config/axios";
-import { NavigateFunction } from "react-router-dom";
 
 export interface IEmpresa {
     direccion: string
@@ -13,15 +12,9 @@ export interface IEmpresa {
 @autobind
 export class EmpresaServices {
 
-    private readonly api: AxiosInterceptor
-
     constructor(
-        private readonly _navigate:  NavigateFunction
-    ){
-        this.api = new AxiosInterceptor(
-            this._navigate
-        )
-    }
+        private readonly api: AxiosInterceptor
+    ) {}
 
     public async empresas_by_username(username: string) {
         return await this.api.AxiosInstance({

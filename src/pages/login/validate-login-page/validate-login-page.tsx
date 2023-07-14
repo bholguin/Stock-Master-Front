@@ -1,16 +1,21 @@
-import { useMemo } from "react"
+import { AxiosInterceptor } from "config/axios";
+import { FC, useMemo } from "react"
 import { useLocation, useNavigate } from "react-router-dom";
 import { ValidateLogin, ValidateLoginStore } from "screens/login/validate-login"
 import { AuthServices } from "services/auth";
 
-export const ValidateLoginPage = () => {
+export const ValidateLoginPage: FC = () => {
 
     const navigate = useNavigate();
     const location = useLocation()
 
-    const auth = useMemo(() => new AuthServices(
+    const api = useMemo(() => new AxiosInterceptor(
         navigate
     ), [navigate])
+
+    const auth = useMemo(() => new AuthServices(
+        api
+    ), [api])
 
     const store = useMemo(() => new ValidateLoginStore(
         navigate,
@@ -22,3 +27,5 @@ export const ValidateLoginPage = () => {
         <ValidateLogin store={store} />
     )
 }
+
+export default ValidateLoginPage

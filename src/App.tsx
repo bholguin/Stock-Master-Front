@@ -1,5 +1,5 @@
 import { BrowserRouter, useNavigate } from 'react-router-dom';
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 import { AuthStore } from './stores/auth-store';
 import { observer } from 'mobx-react';
 import { AppRoutes } from 'routes';
@@ -19,7 +19,9 @@ const Application: FC<Props> = observer((props) => {
 
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <Suspense fallback={<div>Cargando...</div>}>
+        <AppRoutes />
+      </Suspense>
     </BrowserRouter>
   )
 

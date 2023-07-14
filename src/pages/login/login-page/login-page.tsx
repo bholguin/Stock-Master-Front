@@ -1,9 +1,30 @@
-import { FC } from "react"
-import { Login } from "../../../screens/login"
+import { FC, useMemo } from "react"
+import { Login, LoginScreenStore } from "../../../screens/login"
+import { ValidatorServices } from "services/validator"
+import { useNavigate } from "react-router-dom"
+import { AxiosInterceptor } from "config/axios"
 
-export const LoginPage: FC = () => {
+const LoginPage: FC = () => {
+
+    const navigate = useNavigate()
+
+    const api = useMemo(() => new AxiosInterceptor(
+        null,
+        false
+    ), [])
+
+    const validate = useMemo(() => new ValidatorServices(
+        api
+    ), [api])
+
+    const store = useMemo(() => new LoginScreenStore(
+        validate,
+        navigate
+    ), [validate, navigate])
 
     return (
-        <Login />
+        <Login store={store}/>
     )
 }
+
+export default LoginPage

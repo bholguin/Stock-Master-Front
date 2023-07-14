@@ -1,6 +1,5 @@
 import autobind from "autobind-decorator";
 import { AxiosInterceptor } from "config/axios";
-import { NavigateFunction } from "react-router-dom";
 
 export type Credentials = {
     username: string;
@@ -10,15 +9,11 @@ export type Credentials = {
 
 @autobind
 export class AuthServices {
-    private readonly api: AxiosInterceptor
 
     constructor(
-        private readonly _navigate:  NavigateFunction
-    ){
-        this.api = new AxiosInterceptor(
-            this._navigate
-        )
-    }
+        private readonly api: AxiosInterceptor
+    ) { }
+
     public async login(data: Credentials) {
         return await this.api.AxiosInstance({
             method: 'post',

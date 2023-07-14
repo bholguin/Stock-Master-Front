@@ -2,16 +2,16 @@ import autobind from "autobind-decorator";
 import { AxiosInterceptor } from "config/axios";
 
 @autobind
-export class UsuarioServices {
+export class ValidatorServices {
 
     constructor(
         private readonly api: AxiosInterceptor
     ){}
 
-    public async get_usuarios() {
+    public async test_token() {
         return await this.api.AxiosInstance({
             method: 'get',
-            url: `/usuarios`,
+            url: `/validator`,
         });
     }
 }

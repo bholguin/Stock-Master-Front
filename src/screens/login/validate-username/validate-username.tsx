@@ -20,9 +20,6 @@ export const ValidateUsername: FC<Props> = observer((props) => {
 
     return (
         <Styled.Form onSubmit={handleSubmit(getEmpresasByUsername)}>
-            <Styled.Title variant="body2">
-                Inventario
-            </Styled.Title>
             <InputTextForm
                 control={control}
                 name={'username'}
@@ -39,6 +36,7 @@ export const ValidateUsername: FC<Props> = observer((props) => {
                 fullWidth
                 type="submit"
                 disabled={!isValid}
+                endIcon={<Styled.ArrowForwardIconStyled />}
             >
                 Continuar
             </Styled.ButtonStyled>
