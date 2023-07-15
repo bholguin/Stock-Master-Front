@@ -1,12 +1,20 @@
 import { FC } from "react"
 import { Styled } from './styles'
+import { HomeStore } from "./home-screen-store"
 
-export const Home: FC = () => {
+type Props = {
+    store: HomeStore
+}
+
+export const Home: FC<Props> = (props) => {
     return (
         <Styled.Content>
-            <Styled.CardStyled variant="contained">
+            <Styled.CardStyled
+                variant="contained"
+                onClick={props.store.goToConfig}
+            >
                 <Styled.CardContentStyled>
-                <Styled.RoomPreferencesIconStyled />
+                    <Styled.RoomPreferencesIconStyled />
                     <Styled.Title variant="h3">
                         Configuracion
                     </Styled.Title>
@@ -14,7 +22,7 @@ export const Home: FC = () => {
             </Styled.CardStyled>
             <Styled.CardStyled variant="contained">
                 <Styled.CardContentStyled>
-                <Styled.ShoppingCartCheckoutIconStyled />
+                    <Styled.ShoppingCartCheckoutIconStyled />
                     <Styled.Title variant="h3">
                         Productos
                     </Styled.Title>

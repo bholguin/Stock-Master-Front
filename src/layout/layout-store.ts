@@ -1,8 +1,10 @@
+import autobind from "autobind-decorator";
 import { NavigateFunction } from "react-router-dom";
 import { UsuarioServices } from "services/usuario";
 import { AsyncOperationStore } from "stores/AsyncOperation";
 import { HandlerError } from "utilities/handler-error/handler-error";
 
+@autobind
 export class LayoutStore {
 
     private readonly _handlerError: HandlerError
