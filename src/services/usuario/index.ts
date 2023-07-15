@@ -9,4 +9,11 @@ export class UsuarioServices {
             url: `/usuarios`,
         });
     }
+
+    public async get_current_user(){
+        return await axios({
+            method: 'get',
+            url: '/usuario'
+        })
+    }
 }

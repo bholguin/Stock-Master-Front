@@ -70,8 +70,11 @@ export const components: Components<Omit<Theme, 'components'>> = {
           },
         }),
         ...(ownerState.variant === 'contained' && {
+          '&:hover': {
+            'backgroundColor': theme.palette.primary['300'],
+          },
           '&.Mui-disabled': {
-            'backgroundColor': theme.palette.grey['500'],
+            'backgroundColor': theme.palette.primary['100'],
             'color': theme.palette.common.white,
           },
         }),

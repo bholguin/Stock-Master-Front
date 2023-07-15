@@ -14,7 +14,7 @@ export class LoginScreenStore {
             try {
                 const response = await this._validatorService.test_token()
                 if (response.data) {
-                    this._navigate('/home')
+                    this._navigate('/app')
                 }
             } catch (e: any) {
                 this._handlerError.takeError(e, false)

@@ -25,7 +25,7 @@ export class ValidateLoginStore {
                     empresa_id: data.empresa
                 });
                 sessionStorage.setItem('app-token', response.data)
-                this._navigate('/home')
+                this._navigate('/app')
             } catch (e: any) {
                 this._handlerError.takeError(e)
             }
@@ -42,7 +42,7 @@ export class ValidateLoginStore {
                 empresas: this._location.state.empresas,
                 username: this._location.state.username
             })
-        }else{
+        } else {
             this._navigate('/')
         }
 
