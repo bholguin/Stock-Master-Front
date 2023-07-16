@@ -1,10 +1,10 @@
 import autobind from "autobind-decorator";
-import axios from "axios";
+import { AxiosApi } from "config/axios";
 
 @autobind
 export class ValidatorServices {
-    public async test_token() {
-        return await axios({
+    public test_token() {
+        return AxiosApi({
             method: 'get',
             url: `/validator`,
         });

@@ -1,17 +1,17 @@
 import autobind from "autobind-decorator";
-import axios from "axios";
+import { AxiosApi } from "config/axios";
 
 @autobind
 export class UsuarioServices {
-    public async get_usuarios() {
-        return await axios({
+    public get_usuarios() {
+        return AxiosApi({
             method: 'get',
             url: `/usuarios`,
         });
     }
 
-    public async get_current_user(){
-        return await axios({
+    public get_current_user(){
+        return AxiosApi({
             method: 'get',
             url: '/usuario'
         })

@@ -1,5 +1,5 @@
 import autobind from "autobind-decorator";
-import axios from "axios";
+import { AxiosApi } from "config/axios";
 
 export interface IEmpresa {
     direccion: string
@@ -12,8 +12,23 @@ export interface IEmpresa {
 @autobind
 export class EmpresaServices {
 
-    public async empresas_by_username(username: string) {
-        return await axios({
+    public get_empresa(){
+        return AxiosApi({
+            method: 'get',
+            url: '/empresa',
+        });
+    }
+
+    public put_empresa(data: IEmpresa){
+        return AxiosApi({
+            method: 'put',
+            url: '/empresa',
+            data
+        });
+    }
+
+    public empresas_by_username(username: string) {
+        return AxiosApi({
             method: 'get',
             url: `/empresas_by_username`,
             params: {

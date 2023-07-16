@@ -39,6 +39,7 @@ export namespace Styled {
         padding: theme.spacing(2),
         [theme.breakpoints.up('lg')]: {
             marginTop: theme.spacing(0),
+            padding: `${theme.spacing(2)} ${theme.spacing(4)}`,
         }
     }))
 

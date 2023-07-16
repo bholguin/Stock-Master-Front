@@ -1,5 +1,5 @@
 import autobind from "autobind-decorator";
-import axios from "axios";
+import { AxiosApi } from "config/axios";
 
 export type Credentials = {
     username: string;
@@ -9,8 +9,8 @@ export type Credentials = {
 
 @autobind
 export class AuthServices {
-    public async login(data: Credentials) {
-        return await axios({
+    public login(data: Credentials) {
+        return AxiosApi({
             method: 'post',
             url: '/login',
             data

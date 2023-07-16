@@ -1,18 +1,18 @@
+import { useAxiosConfig } from "config/axios"
 import { FC, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import { Empresas, EmpresasStore } from "screens/configuration/empresas"
-import { UsuarioServices } from "services/usuario"
+import { EmpresaServices } from "services/empresa"
 
 export const EmpresasPage: FC = () => {
-
+    useAxiosConfig()
     const navigate = useNavigate()
-
-    const usuario = useMemo(() => new UsuarioServices(), [])
+    const empresa = useMemo(() => new EmpresaServices(), [])
 
     const store = useMemo(() => new EmpresasStore(
-        usuario,
+        empresa,
         navigate
-    ), [usuario, navigate])
+    ), [empresa, navigate])
 
     return (
         <Empresas store={store} />
