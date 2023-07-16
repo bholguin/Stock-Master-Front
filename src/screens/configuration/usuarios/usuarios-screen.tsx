@@ -12,6 +12,6 @@ export const Usuarios: FC<Props> = (props) => {
     }, [props.store])
 
     return(
-        <div>usuarios</div>
+        <div>pagina para usuarios</div>
     )
 }

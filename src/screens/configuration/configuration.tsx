@@ -1,31 +1,30 @@
 import { FC } from "react"
-import { Styled } from "./styles"
-import { Typography } from "@mui/material"
+import { LayoutPage } from "components/LayoutPage"
+import { useNavigate } from "react-router-dom"
 
 export const Configuration: FC = () => {
+    const navigate = useNavigate()
+    const goBack = () => navigate('/app')
     return (
-        <Styled.Content>
-            <Styled.ContentOptions>
-                <Styled.TitlePage>
-                    <Styled.FabStyled onClick={() => { }}>
-                        <Styled.ArrowBackIconStyled />
-                    </Styled.FabStyled>
-                    <Typography variant="h1">
-                        Configuracion
-                    </Typography>
-                </Styled.TitlePage>
-                <Styled.PaperStyled elevation={24} square>
-                    <Styled.Options>
-                        <Styled.PaperOption elevation={6}>
-                            Usuarios
-                        </Styled.PaperOption>
-                        <Styled.PaperOption elevation={6}>
-                            Vehiculos
-                        </Styled.PaperOption>
-                    </Styled.Options>
-                </Styled.PaperStyled>
-            </Styled.ContentOptions>
-
-        </Styled.Content>
+        <LayoutPage
+            page="Configuracion"
+            goBack={goBack}
+            pages={[{
+                label: 'Empresa',
+                goTo: 'empresas'
+            },{
+                label: 'Usuarios',
+                goTo: 'usuarios'
+            },{
+                label: 'Bodegas',
+                goTo: 'bodegas'
+            },{
+                label: 'Vahiculos',
+                goTo: 'vehiculos'
+            },{
+                label: 'Unidades',
+                goTo: 'unidades'
+            }]}
+        />
     )
 }

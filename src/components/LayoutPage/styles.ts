@@ -35,6 +35,8 @@ export namespace Styled {
         height: '90vh',
         position: 'relative',
         marginTop: theme.spacing(4),
+        borderRadius: '5px',
+        padding: theme.spacing(2),
         [theme.breakpoints.up('lg')]: {
             marginTop: theme.spacing(0),
         }
@@ -50,23 +52,25 @@ export namespace Styled {
         [theme.breakpoints.up('lg')]: {
             display: 'flex',
             flexDirection: 'column',
-            left: '-130px',
+            left: '-135px',
             top: '85px',
         }
     }))
 
 
-    export const PaperOption = styled(Paper)(({ theme }) => ({
+    export const PaperOption = styled(Paper, {
+         shouldForwardProp: (props) => props !== 'active',
+    })<{active: boolean}>(({ theme, active }) => ({
         width: '150px',
         height: '40px',
         display: 'flex',
         alignItems: 'center',
         padding: theme.spacing(.5),
         cursor: 'pointer',
-        backgroundColor: theme.palette.primary['50'],
-        color: theme.palette.primary.dark,
+        backgroundColor: active ? theme.palette.primary.main:theme.palette.primary['50'],
+        color: active ? theme.palette.common.white  : theme.palette.primary.dark,
         justifyContent: 'center',
-        fontWeight: '600',
+        fontWeight: '700',
         [theme.breakpoints.up('lg')]: {
             justifyContent: 'flex-start'
         }

@@ -1,22 +1,22 @@
 import { FC, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
-import { Usuarios, UsuariosStore } from "screens/usuarios"
+import { Empresas, EmpresasStore } from "screens/configuration/empresas"
 import { UsuarioServices } from "services/usuario"
 
-export const UsuariosPage: FC = () => {
+export const EmpresasPage: FC = () => {
 
     const navigate = useNavigate()
 
     const usuario = useMemo(() => new UsuarioServices(), [])
 
-    const store = useMemo(() => new UsuariosStore(
+    const store = useMemo(() => new EmpresasStore(
         usuario,
         navigate
     ), [usuario, navigate])
 
     return (
-        <Usuarios store={store} />
+        <Empresas store={store} />
     )
 }
 
-export default UsuariosPage
+export default EmpresasPage
