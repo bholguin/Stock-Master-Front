@@ -3,6 +3,7 @@ import { FC, lazy, useMemo } from "react";
 import { Layout, LayoutStore } from "layout";
 import { UsuarioServices } from "services/usuario";
 import { Configuration } from "screens/configuration";
+import { useAxiosConfig } from "config/axios";
 
 const LoginPage = lazy(() => import("../pages/login/login-page/login-page"))
 const ValidateUsernamePage = lazy(() => import("../pages/login/validate-username-page/validate-username-page"))
@@ -13,6 +14,7 @@ const UsuariosPage = lazy(() => import("../pages/configuration/usuarios/usuarios
 const VehiculosPage = lazy(() => import("../pages/configuration/vehiculos/vehiculos-page"))
 
 export const AppRoutes: FC = () => {
+    useAxiosConfig()
     const navigate = useNavigate()
     const usuarios = useMemo(() => new UsuarioServices(), [])
     const store = useMemo(() => new LayoutStore(

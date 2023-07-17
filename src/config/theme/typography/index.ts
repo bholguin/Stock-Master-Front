@@ -78,7 +78,7 @@ export const typography: TypographyOptions = {
     color: '#18243E',
   },
   body2: {
-    fontFamily: 'Dancing Script, cursive',
+    fontFamily: 'Source Sans Pro, sans-serif',
     fontWeight: 700,
     fontSize: '1rem',
     lineHeight: 1.2,
