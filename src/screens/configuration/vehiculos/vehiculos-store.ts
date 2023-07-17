@@ -68,6 +68,10 @@ export class VeiculosStore {
           )
     }
 
+    public goToCreate(){
+      this._navigate('create')
+    }
+
     public get vehiculos(): Array<IVehiculo> {
         return this._vehiculos.items
     }

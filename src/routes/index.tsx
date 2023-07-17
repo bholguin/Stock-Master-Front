@@ -12,6 +12,7 @@ const HomePage = lazy(() => import("../pages/home/home-page"))
 const EmpresasPage = lazy(() => import("../pages/configuration/empresas/empresas-page"))
 const UsuariosPage = lazy(() => import("../pages/configuration/usuarios/usuarios-page"))
 const VehiculosPage = lazy(() => import("../pages/configuration/vehiculos/vehiculos-page"))
+const CreateVehiculosPage = lazy(() => import("../pages/configuration/vehiculos/create-vehiculo-page"))
 
 export const AppRoutes: FC = () => {
     useAxiosConfig()
@@ -32,7 +33,9 @@ export const AppRoutes: FC = () => {
                 <Route path="configuration" element={<Configuration />}>
                     <Route path="empresas" element={<EmpresasPage />} />
                     <Route path="usuarios" element={<UsuariosPage />} />
-                    <Route path="vehiculos" element={<VehiculosPage />} />
+                    <Route path="vehiculos" element={<VehiculosPage />} >
+                        <Route path="create" element={<CreateVehiculosPage />} />
+                    </Route>
                 </Route>
             </Route>
         </Routes>

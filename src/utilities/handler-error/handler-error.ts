@@ -9,7 +9,7 @@ export class HandlerError {
 
     public takeError(error: XMLHttpRequest, redirect401: boolean = true) {
         if(error.response.status === 401 && redirect401){
-            this._navigate('/')
+            // this._navigate('/')
         }else{
             toast(error.response.data, {
                 type: 'error'

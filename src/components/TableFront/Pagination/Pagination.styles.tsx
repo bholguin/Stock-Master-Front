@@ -86,4 +86,5 @@ export namespace Styled {
     color: theme.palette.primary.main,
     fontSize: '1rem'
   }))
+  
 }

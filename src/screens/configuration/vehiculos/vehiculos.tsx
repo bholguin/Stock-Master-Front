@@ -6,6 +6,7 @@ import { Styled } from './styles'
 import { EnhancedTable } from "components/TableFront"
 import { StyledBodyTable } from "components/Table"
 import { TableActions } from "components/TableActions"
+import { Outlet } from "react-router-dom"
 
 
 type Props = {
@@ -23,9 +24,10 @@ export const Vehiculos: FC<Props> = observer((props) => {
 
     return (
         <Styled.Content>
+            <Outlet />
             <HeaderModule
                 title="Vehiculos"
-                createFunction={() => { }}
+                createFunction={store.goToCreate}
             />
             <EnhancedTable
                 store={store.tableStore}
