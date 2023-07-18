@@ -1,11 +1,9 @@
-import { useAxiosConfig } from "config/axios"
 import { FC, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import { Usuarios, UsuariosStore } from "screens/configuration/usuarios"
 import { UsuarioServices } from "services/usuario"
 
 export const UsuariosPage: FC = () => {
-    useAxiosConfig()
     const navigate = useNavigate()
 
     const usuario = useMemo(() => new UsuarioServices(), [])

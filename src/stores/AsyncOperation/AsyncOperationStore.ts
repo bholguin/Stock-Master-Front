@@ -1,11 +1,13 @@
-import {computed} from 'mobx';
+import { action, computed } from 'mobx';
 import autobind from 'autobind-decorator';
-import {AxiosError} from 'axios';
-import {OperationStatusStore} from '../OperationStatus';
+import { AxiosError } from 'axios';
+import { OperationStatusStore } from '../OperationStatus';
+import { toast } from 'react-toastify';
+import { NavigateFunction } from 'react-router-dom';
 
 export interface IAsyncOperationStore<TParams, TResult> {
-    status: OperationStatusStore;
-    run(params: TParams): Promise<TResult>;
+  status: OperationStatusStore;
+  run(params: TParams): Promise<TResult>;
 }
 
 export type AsyncOperationCallbackType<TParams, TResult> = (params: TParams) => Promise<TResult>;
@@ -15,10 +17,12 @@ export class AsyncOperationStore<TParams, TResult = void> implements IAsyncOpera
   private readonly _status = new OperationStatusStore();
 
   constructor(
-        private readonly _operationCallback: AsyncOperationCallbackType<TParams, TResult>,
+    private readonly _navigate: NavigateFunction,
+    private readonly _operationCallback: AsyncOperationCallbackType<TParams, TResult>,
   ) {
   }
 
+  @action
   public async run(params?: TParams): Promise<TResult> {
     try {
       this._status.start();
@@ -28,8 +32,14 @@ export class AsyncOperationStore<TParams, TResult = void> implements IAsyncOpera
     } catch (e) {
       if (e instanceof AxiosError) {
         this._status.fail(e);
+        if (e.response.status === 401) {
+          this._navigate('/')
+        } else {
+          toast(`${e.response.status} - ${e.response.data}`, {
+            type: 'error'
+          })
+        }
       }
-      return Promise.reject(e);
     } finally {
       this._status.idle();
     }

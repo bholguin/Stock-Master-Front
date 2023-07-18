@@ -8,12 +8,9 @@ import { IVehiculo, VehiculosServices } from "services/vehiculos";
 import { ArrayStore } from "stores/ArrayStore";
 import { AsyncOperationStore } from "stores/AsyncOperation";
 import { DisposableStore } from "stores/Dispose";
-import { HandlerError } from "utilities/handler-error/handler-error";
 
 @autobind
 export class VeiculosStore {
-
-  private readonly _handlerError: HandlerError
 
   public readonly tableStore: EnhancedTableStore<IVehiculo & { action?: unknown }>;
 
@@ -37,24 +34,17 @@ export class VeiculosStore {
   ]);
 
   public readonly getVehiculos = new AsyncOperationStore(
+    this._navigate,
     async () => {
-      try {
-        const response = await this._vehiculosServices.get_vehiculos()
-        this._vehiculos.setItems(response.data)
-      } catch (e: any) {
-        this._handlerError.takeError(e)
-      }
+      const response = await this._vehiculosServices.get_vehiculos()
+      this._vehiculos.setItems(response.data)
     }
   )
 
   public readonly deleteVehiculos = new AsyncOperationStore(
+    this._navigate,
     async (id: number) => {
-      try {
-        await this._vehiculosServices.delete_vehiculo(id)
-
-      } catch (e: any) {
-        this._handlerError.takeError(e)
-      }
+      await this._vehiculosServices.delete_vehiculo(id)
     }
   )
 
@@ -62,7 +52,6 @@ export class VeiculosStore {
     private readonly _vehiculosServices: VehiculosServices,
     private readonly _navigate: NavigateFunction
   ) {
-    this._handlerError = new HandlerError(this._navigate)
     this.tableStore = new EnhancedTableStore(
       this._columns.items,
     );
@@ -79,6 +68,7 @@ export class VeiculosStore {
       reaction(
         () => this.deleteVehiculos.status.isDone,
         (status) => {
+          console.log(status, 'stadffff');
           if (status) {
             toast('El vehiculo se elimino con exito.', {
               type: 'success'

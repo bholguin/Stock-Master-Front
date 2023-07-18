@@ -1,11 +1,9 @@
-import { useAxiosConfig } from "config/axios"
 import { FC, useEffect, useMemo } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { UpdateVehiculo, UpdateVehiculoStore } from "screens/configuration/vehiculos/update-vehiculo"
 import { VehiculosServices } from "services/vehiculos"
 
 const UpdateVehiculosPage: FC = () => {
-    useAxiosConfig()
     const params = useParams<{vehiculo_id: string}>()
     const navigate = useNavigate()
     const vehiculos = useMemo(() => new VehiculosServices(), [])

@@ -6,23 +6,17 @@ import { IVehiculo, VehiculosServices } from "services/vehiculos";
 import { AsyncOperationStore } from "stores/AsyncOperation";
 import { DisposableStore } from "stores/Dispose";
 import { VisibilityStore } from "stores/Visibility";
-import { HandlerError } from "utilities/handler-error/handler-error";
 
 @autobind
 export class CreateVehiculoStore {
     public readonly show = new VisibilityStore(true)
 
-    private readonly _handlerError: HandlerError
-
     private readonly _disposer = new DisposableStore();
 
     public readonly postVehiculos = new AsyncOperationStore(
+        this._navigate,
         async (data: IVehiculo) => {
-            try {
-                await this._vehiculosServices.post_vehiculo(data)
-            } catch (e: any) {
-                this._handlerError.takeError(e)
-            }
+            await this._vehiculosServices.post_vehiculo(data)
         }
     )
 
@@ -30,10 +24,6 @@ export class CreateVehiculoStore {
         private readonly _vehiculosServices: VehiculosServices,
         private readonly _navigate: NavigateFunction
     ){
-        this._handlerError = new HandlerError(
-            this._navigate
-        )
-
         this._disposer.push(
             reaction(
                 () => this.postVehiculos.status.isDone,
