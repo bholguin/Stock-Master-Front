@@ -16,6 +16,9 @@ const UpdateVehiculosPage = lazy(() => import("../pages/configuration/vehiculos/
 const UnidadesMedidasPage = lazy(() => import("../pages/configuration/unidades/unidades-page"))
 const CreateUnidadPage = lazy(() => import("../pages/configuration/unidades/create-unidad-page"))
 const UpdateUnidadPage = lazy(() => import("../pages/configuration/unidades/update-unidad-page"))
+const BodegasPage = lazy(() => import("../pages/configuration/bodegas/bodegas-page"))
+const CreateBodegaPage = lazy(() => import("../pages/configuration/bodegas/create-bodega-page"))
+const UpdateBodegaPage = lazy(() => import("../pages/configuration/bodegas/update-bodega-page"))
 
 export const AppRoutes: FC = () => {
     const navigate = useNavigate()
@@ -42,6 +45,10 @@ export const AppRoutes: FC = () => {
                     <Route path="unidades" element={<UnidadesMedidasPage />}>
                         <Route path="create" element={<CreateUnidadPage />} />
                         <Route path=":unidad_id" element={<UpdateUnidadPage />} />
+                    </Route>
+                    <Route path="bodegas" element={<BodegasPage />}>
+                        <Route path="create" element={<CreateBodegaPage />} />
+                        <Route path=":bodega_id" element={<UpdateBodegaPage />} />
                     </Route>
                 </Route>
             </Route>
