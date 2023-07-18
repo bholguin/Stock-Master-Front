@@ -16,12 +16,16 @@ export const CreateVehiculo: FC<Props> = observer((props) => {
     const { store } = props
 
     const { control, handleSubmit, formState: { isValid } } = useForm<IVehiculo>({
-        mode: 'onChange'
+        mode: 'onChange',
+        defaultValues:{
+            descripcion: '',
+            placa: ''
+        }
     })
 
     const submit = useCallback((data: IVehiculo) => {
-        console.log(data);    
-    }, [])
+       store.postVehiculos.run(data)  
+    }, [store.postVehiculos])
 
     return (
         <Styled.DialogStyled

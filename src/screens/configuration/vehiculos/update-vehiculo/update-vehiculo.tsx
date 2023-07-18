@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import { FC, useCallback } from "react";
+import { FC, useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IVehiculo } from "services/vehiculos";
 import { Styled } from "../styles";
@@ -15,13 +15,25 @@ export const UpdateVehiculo: FC<Props> = observer((props) => {
 
     const { store } = props
 
-    const { control, handleSubmit, formState: { isValid } } = useForm<IVehiculo>({
-        mode: 'onChange'
+    const { control, handleSubmit, reset, formState: { isValid } } = useForm<IVehiculo>({
+        mode: 'onChange',
+        defaultValues: {
+            descripcion: '',
+            placa: ''
+        }
     })
 
     const submit = useCallback((data: IVehiculo) => {
-        console.log(data);
-    }, [])
+        store.putVehiculo.run(data)
+    }, [store.putVehiculo])
+
+    useEffect(() => {
+        store.getVehiculo.run()
+    }, [store.getVehiculo])
+
+    useEffect(() => {
+        reset(store.vehiculo)
+    }, [store.vehiculo, reset])
 
     return (
         <Styled.DialogStyled
@@ -30,7 +42,7 @@ export const UpdateVehiculo: FC<Props> = observer((props) => {
         >
             <Styled.Form onSubmit={handleSubmit(submit)}>
                 <Styled.DialogTitleStyled>
-                    Crear Vehiculo
+                    Editar Vehiculo
                     <Styled.CloseIconStyled onClick={store.goBack} />
                 </Styled.DialogTitleStyled>
                 <Styled.DialogContentStyled>

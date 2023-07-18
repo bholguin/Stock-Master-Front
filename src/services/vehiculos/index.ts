@@ -14,4 +14,40 @@ export class VehiculosServices {
             url: '/vehiculos'
         })
     }
+
+    public post_vehiculo(data: IVehiculo) {
+        return AxiosApi({
+            method: 'post',
+            url: '/vehiculo',
+            data
+        })
+    }
+
+    public put_vehiculo(data: IVehiculo) {
+        return AxiosApi({
+            method: 'put',
+            url: '/vehiculo',
+            data
+        })
+    }
+
+    public get_vehiculo(id: string) {
+        return AxiosApi({
+            method: 'get',
+            url: '/vehiculo',
+            params: {
+                vehiculo_id: id
+            }
+        })
+    }
+
+    public delete_vehiculo(id: number) {
+        return AxiosApi({
+            method: 'delete',
+            url: '/vehiculo',
+            params: {
+                vehiculo_id: id
+            }
+        })
+    }
 }

@@ -1,5 +1,5 @@
 import { useAxiosConfig } from "config/axios"
-import { FC, useMemo } from "react"
+import { FC, useEffect, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import { Vehiculos, VeiculosStore } from "screens/configuration/vehiculos"
 import { VehiculosServices } from "services/vehiculos"
@@ -12,6 +12,13 @@ const VehiculosPage: FC = () => {
         vehiculos,
         navigate,
     ), [navigate, vehiculos])
+    
+    useEffect(() => {
+        return () => {
+          (store.dispose)();
+        };
+      });
+      
     return(
         <Vehiculos store={store}/>
     )

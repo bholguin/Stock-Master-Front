@@ -3,6 +3,7 @@ import { EnhancedTableStore } from "components/TableFront";
 import { HeadCell } from "components/TableFront/Head";
 import { reaction } from "mobx";
 import { NavigateFunction } from "react-router-dom";
+import { toast } from "react-toastify";
 import { IVehiculo, VehiculosServices } from "services/vehiculos";
 import { ArrayStore } from "stores/ArrayStore";
 import { AsyncOperationStore } from "stores/AsyncOperation";
@@ -12,67 +13,97 @@ import { HandlerError } from "utilities/handler-error/handler-error";
 @autobind
 export class VeiculosStore {
 
-    private readonly _handlerError: HandlerError
+  private readonly _handlerError: HandlerError
 
-    public readonly tableStore: EnhancedTableStore<IVehiculo & {action?: unknown}>;
+  public readonly tableStore: EnhancedTableStore<IVehiculo & { action?: unknown }>;
 
-    private readonly _vehiculos = new ArrayStore<IVehiculo>([])
+  private readonly _vehiculos = new ArrayStore<IVehiculo>([])
 
-    private readonly _disposer = new DisposableStore();
+  private readonly _disposer = new DisposableStore();
 
-    private readonly _columns = new ArrayStore<HeadCell<IVehiculo & {action?: unknown}>>([
-        {
-          id: 'placa',
-          label: 'Placa',
+  private readonly _columns = new ArrayStore<HeadCell<IVehiculo & { action?: unknown }>>([
+    {
+      id: 'placa',
+      label: 'Placa',
+    },
+    {
+      id: 'descripcion',
+      label: 'Descripcion',
+    },
+    {
+      id: 'action',
+      label: '',
+    },
+  ]);
+
+  public readonly getVehiculos = new AsyncOperationStore(
+    async () => {
+      try {
+        const response = await this._vehiculosServices.get_vehiculos()
+        this._vehiculos.setItems(response.data)
+      } catch (e: any) {
+        this._handlerError.takeError(e)
+      }
+    }
+  )
+
+  public readonly deleteVehiculos = new AsyncOperationStore(
+    async (id: number) => {
+      try {
+        await this._vehiculosServices.delete_vehiculo(id)
+
+      } catch (e: any) {
+        this._handlerError.takeError(e)
+      }
+    }
+  )
+
+  constructor(
+    private readonly _vehiculosServices: VehiculosServices,
+    private readonly _navigate: NavigateFunction
+  ) {
+    this._handlerError = new HandlerError(this._navigate)
+    this.tableStore = new EnhancedTableStore(
+      this._columns.items,
+    );
+
+    this._disposer.push(
+      reaction(
+        () => this._vehiculos.items,
+        (vehiculos) => {
+          if (Array.isArray(vehiculos)) {
+            this.tableStore.setList(vehiculos);
+          }
         },
-        {
-          id: 'descripcion',
-          label: 'Descripcion',
-        },
-        {
-          id: 'action',
-          label: '',
-        },
-      ]);
-
-    public readonly getVehiculos = new AsyncOperationStore(
-        async () => {
-            try {
-                const response = await this._vehiculosServices.get_vehiculos()
-                console.log(response);
-                this._vehiculos.setItems(response.data)
-            } catch (e: any) {
-                this._handlerError.takeError(e)
-            }
+      ),
+      reaction(
+        () => this.deleteVehiculos.status.isDone,
+        (status) => {
+          if (status) {
+            toast('El vehiculo se elimino con exito.', {
+              type: 'success'
+            })
+            this.getVehiculos.run()
+          }
         }
+      )
     )
+  }
 
-    constructor(
-        private readonly _vehiculosServices: VehiculosServices,
-        private readonly _navigate: NavigateFunction
-    ){
-        this._handlerError = new HandlerError(this._navigate)
-        this.tableStore = new EnhancedTableStore(
-            this._columns.items,
-          );
+  public goToCreate() {
+    this._navigate('create')
+  }
 
-          this._disposer.push(
-            reaction(
-                () => this._vehiculos.items,
-                (vehiculos) => {
-                  if (Array.isArray(vehiculos)) {
-                    this.tableStore.setList(vehiculos);
-                  }
-                },
-              )
-          )
-    }
+  public goToUpdate(id: number) {
+    this._navigate(`${id}`)
+  }
 
-    public goToCreate(){
-      this._navigate('create')
-    }
+  public get vehiculos(): Array<IVehiculo> {
+    return this._vehiculos.items
+  }
 
-    public get vehiculos(): Array<IVehiculo> {
-        return this._vehiculos.items
-    }
+  public async dispose(): Promise<void> {
+    await this._disposer.dispose();
+    await this.tableStore.dispose();
+  }
 }

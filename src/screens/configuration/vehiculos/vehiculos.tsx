@@ -42,7 +42,10 @@ export const Vehiculos: FC<Props> = observer((props) => {
                                 {item.descripcion}
                             </StyledBodyTable.StyledTableCell>
                             <StyledBodyTable.StyledTableCell>
-                                <TableActions />
+                                <TableActions
+                                    update={() => store.goToUpdate(item.id)}
+                                    remove={() => store.deleteVehiculos.run(item.id)}
+                                />
                             </StyledBodyTable.StyledTableCell>
                         </StyledBodyTable.StyledTableRow>
                     ))

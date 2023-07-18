@@ -3,15 +3,34 @@ import { Styled } from "./styles"
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export const TableActions: FC = () => {
+type Props = {
+    update?: (data: any) => void
+    remove?: (data: any) => void
+}
+
+export const TableActions: FC<Props> = (props) => {
+    const {
+        remove,
+        update
+    } = props
     return (
         <Styled.Content>
-            <Styled.ButtonStyled variant="contained">
-                <EditNoteIcon />
-            </Styled.ButtonStyled>
-            <Styled.ButtonStyled variant="contained">
-                <DeleteIcon />
-            </Styled.ButtonStyled>
+            {update &&
+                <Styled.ButtonStyled
+                    variant="contained"
+                    onClick={update}
+                >
+                    <EditNoteIcon />
+                </Styled.ButtonStyled>
+            }
+            {remove &&
+                <Styled.ButtonStyled
+                    variant="contained"
+                    onClick={remove}
+                >
+                    <DeleteIcon />
+                </Styled.ButtonStyled>
+            }
         </Styled.Content>
     )
 }
