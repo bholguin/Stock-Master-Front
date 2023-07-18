@@ -13,6 +13,9 @@ const UsuariosPage = lazy(() => import("../pages/configuration/usuarios/usuarios
 const VehiculosPage = lazy(() => import("../pages/configuration/vehiculos/vehiculos-page"))
 const CreateVehiculosPage = lazy(() => import("../pages/configuration/vehiculos/create-vehiculo-page"))
 const UpdateVehiculosPage = lazy(() => import("../pages/configuration/vehiculos/update-vehiculo-page"))
+const UnidadesMedidasPage = lazy(() => import("../pages/configuration/unidades/unidades-page"))
+const CreateUnidadPage = lazy(() => import("../pages/configuration/unidades/create-unidad-page"))
+const UpdateUnidadPage = lazy(() => import("../pages/configuration/unidades/update-unidad-page"))
 
 export const AppRoutes: FC = () => {
     const navigate = useNavigate()
@@ -35,6 +38,10 @@ export const AppRoutes: FC = () => {
                     <Route path="vehiculos" element={<VehiculosPage />} >
                         <Route path="create" element={<CreateVehiculosPage />} />
                         <Route path=":vehiculo_id" element={<UpdateVehiculosPage />} />
+                    </Route>
+                    <Route path="unidades" element={<UnidadesMedidasPage />}>
+                        <Route path="create" element={<CreateUnidadPage />} />
+                        <Route path=":unidad_id" element={<UpdateUnidadPage />} />
                     </Route>
                 </Route>
             </Route>
