@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom"
 import { LayoutStore } from "./layout-store"
 import { observer } from "mobx-react"
 import { useAxiosConfig } from "config/axios"
+import {Styled} from './styled'
 
 type Props = {
     store: LayoutStore
@@ -16,9 +17,9 @@ export const Layout: FC<Props> = observer((props) => {
     }, [props.store.getUsuario])
 
     return (
-        <>
+        <Styled.Content>
             <Header />
             <Outlet />
-        </>
+        </Styled.Content>
     )
 })

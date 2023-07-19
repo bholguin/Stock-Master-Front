@@ -1,5 +1,6 @@
 import autobind from "autobind-decorator";
 import { AxiosApi } from "config/axios";
+import { trackPromise } from "react-promise-tracker";
 
 export interface IVehiculo {
     placa: string
@@ -9,45 +10,55 @@ export interface IVehiculo {
 @autobind
 export class VehiculosServices {
     public get_vehiculos() {
-        return AxiosApi({
-            method: 'get',
-            url: '/vehiculos'
-        })
+        return trackPromise(
+            AxiosApi({
+                method: 'get',
+                url: '/vehiculos'
+            })
+        )
     }
 
     public post_vehiculo(data: IVehiculo) {
-        return AxiosApi({
-            method: 'post',
-            url: '/vehiculo',
-            data
-        })
+        return trackPromise(
+            AxiosApi({
+                method: 'post',
+                url: '/vehiculo',
+                data
+            })
+        )
     }
 
     public put_vehiculo(data: IVehiculo) {
-        return AxiosApi({
-            method: 'put',
-            url: '/vehiculo',
-            data
-        })
+        return trackPromise(
+            AxiosApi({
+                method: 'put',
+                url: '/vehiculo',
+                data
+            })
+        )
     }
 
     public get_vehiculo(id: string) {
-        return AxiosApi({
-            method: 'get',
-            url: '/vehiculo',
-            params: {
-                vehiculo_id: id
-            }
-        })
+        return trackPromise(
+            AxiosApi({
+                method: 'get',
+                url: '/vehiculo',
+                params: {
+                    vehiculo_id: id
+                }
+            })
+        )
     }
 
     public delete_vehiculo(id: number) {
-        return AxiosApi({
-            method: 'delete',
-            url: '/vehiculo',
-            params: {
-                vehiculo_id: id
-            }
-        })
+        return trackPromise(
+            AxiosApi({
+                method: 'delete',
+                url: '/vehiculo',
+                params: {
+                    vehiculo_id: id
+                }
+            })
+        )
     }
 }

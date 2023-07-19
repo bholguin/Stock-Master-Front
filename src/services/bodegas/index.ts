@@ -1,5 +1,6 @@
 import autobind from "autobind-decorator";
 import { AxiosApi } from "config/axios";
+import { trackPromise } from "react-promise-tracker";
 
 export interface IBodega {
     nombre: string
@@ -10,45 +11,55 @@ export interface IBodega {
 @autobind
 export class BodegasServices {
     public get_bodegas() {
-        return AxiosApi({
-            method: 'get',
-            url: '/bodegas'
-        })
+        return trackPromise(
+            AxiosApi({
+                method: 'get',
+                url: '/bodegas'
+            })
+        )
     }
 
     public post_bodega(data: IBodega) {
-        return AxiosApi({
-            method: 'post',
-            url: '/bodega',
-            data
-        })
+        return trackPromise(
+            AxiosApi({
+                method: 'post',
+                url: '/bodega',
+                data
+            })
+        )
     }
 
     public delete_bodega(id: number) {
-        return AxiosApi({
-            method: 'delete',
-            url: '/bodega',
-            params: {
-                bodega_id: id
-            }
-        })
+        return trackPromise(
+            AxiosApi({
+                method: 'delete',
+                url: '/bodega',
+                params: {
+                    bodega_id: id
+                }
+            })
+        )
     }
 
     public put_bodega(data: IBodega) {
-        return AxiosApi({
-            method: 'put',
-            url: '/bodega',
-            data
-        })
+        return trackPromise(
+            AxiosApi({
+                method: 'put',
+                url: '/bodega',
+                data
+            })
+        )
     }
 
     public get_bodega(id: string) {
-        return AxiosApi({
-            method: 'get',
-            url: '/bodega',
-            params: {
-                bodega_id: id
-            }
-        })
+        return trackPromise(
+            AxiosApi({
+                method: 'get',
+                url: '/bodega',
+                params: {
+                    bodega_id: id
+                }
+            })
+        )
     }
 }

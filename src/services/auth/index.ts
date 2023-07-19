@@ -1,5 +1,6 @@
 import autobind from "autobind-decorator";
 import { AxiosApi } from "config/axios";
+import { trackPromise } from "react-promise-tracker";
 
 export type Credentials = {
     username: string;
@@ -10,10 +11,12 @@ export type Credentials = {
 @autobind
 export class AuthServices {
     public login(data: Credentials) {
-        return AxiosApi({
-            method: 'post',
-            url: '/login',
-            data
-        });
+        return trackPromise(
+            AxiosApi({
+                method: 'post',
+                url: '/login',
+                data
+            })
+        )
     }
 }
