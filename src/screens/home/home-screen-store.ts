@@ -10,6 +10,6 @@ export class HomeStore {
     }
 
     public goToConfig() {
-        this._navigate('configuration/empresas')
+        this._navigate('configuracion/empresas')
     }
 }

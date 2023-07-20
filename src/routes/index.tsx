@@ -35,7 +35,7 @@ export const AppRoutes: FC = () => {
             </Route>
             <Route path="/app" element={<Layout store={store} />}>
                 <Route index element={<HomePage />}></Route>
-                <Route path="configuration" element={<Configuration />}>
+                <Route path="configuracion" element={<Configuration />}>
                     <Route path="empresas" element={<EmpresasPage />} />
                     <Route path="usuarios" element={<UsuariosPage />} />
                     <Route path="vehiculos" element={<VehiculosPage />} >

@@ -40,7 +40,7 @@ export class CreateBodegaStore {
     }
 
     public goBack(){
-        this._navigate('/app/configuration/bodegas')
+        this._navigate('/app/configuracion/bodegas')
     }
 
     public async dispose(): Promise<void> {

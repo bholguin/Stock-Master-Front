@@ -40,7 +40,7 @@ export class CreateUnidadStore {
     }
 
     public goBack(){
-        this._navigate('/app/configuration/unidades')
+        this._navigate('/app/configuracion/unidades')
     }
 
     public async dispose(): Promise<void> {

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react"
+import { FC } from "react"
 import { Styled } from "./styles"
 import { Typography } from "@mui/material"
 import { Outlet, useLocation, useNavigate } from "react-router-dom"
@@ -24,16 +24,8 @@ export const LayoutPage: FC<Props> = (props) => {
 
     const location = useLocation();
     const navigate = useNavigate()
-    const [active, setActive] = useState<string>('');
-
     const goTo = (place: string) => navigate(place)
-
-    useEffect(() => {
-        const activeLink = location.pathname.split('/').slice(-1);
-        Array.isArray(activeLink) ?
-            setActive(activeLink[0]) :
-            setActive('');
-    }, [location]);
+    const activeLink = location.pathname.split('/');
 
     return (
         <Styled.Content>
@@ -53,7 +45,7 @@ export const LayoutPage: FC<Props> = (props) => {
                                 <Styled.PaperOption
                                     key={`page-${item.label}`}
                                     elevation={6}
-                                    active={active === item.goTo}
+                                    active={activeLink.includes(item.goTo)}
                                     onClick={() => goTo(item.goTo)}
                                 >
                                     {item.label}

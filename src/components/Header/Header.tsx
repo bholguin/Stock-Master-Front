@@ -11,13 +11,23 @@ import MenuItem from '@mui/material/MenuItem';
 import { Styled } from './styles'
 import { Divider, ListItemIcon } from '@mui/material';
 import { Logout, Person } from '@mui/icons-material';
+import { useLocation } from 'react-router-dom';
 
 const pages = ['Configuracion', 'Productos', 'Inventario'];
 
-export const Header: FC = () => {
+type Props = {
+    nombre: string
+}
+
+export const Header: FC<Props> = (props) => {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
+    const location = useLocation();
+    const activeLink = location.pathname.split('/');
+
+    console.log(activeLink);
+    
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -106,7 +116,8 @@ export const Header: FC = () => {
                             <Button
                                 key={page}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 1, color: 'white', display: 'block' }}
+                                variant={activeLink.includes(page.toLocaleLowerCase()) ? 'outlined': 'text'}
+                                sx={{ my: 1, color: !activeLink.includes(page.toLocaleLowerCase()) && 'white',  display: 'block' }}
                             >
                                 {page}
                             </Button>
@@ -162,7 +173,7 @@ export const Header: FC = () => {
                         >
                             <MenuItem onClick={handleCloseUserMenu}>
                                 <Styled.Name variant='h4'>
-                                    Pepito Perez
+                                    {props?.nombre}
                                 </Styled.Name>
                             </MenuItem>
                             <Divider />

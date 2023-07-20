@@ -52,7 +52,7 @@ export class UpdateVehiculoStore {
     }
 
     public goBack() {
-        this._navigate('/app/configuration/vehiculos')
+        this._navigate('/app/configuracion/vehiculos')
     }
 
     public get vehiculo(): IVehiculo {

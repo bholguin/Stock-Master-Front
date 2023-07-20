@@ -18,7 +18,7 @@ export const Layout: FC<Props> = observer((props) => {
 
     return (
         <Styled.Content>
-            <Header />
+            <Header nombre={props.store.name} />
             <Outlet />
         </Styled.Content>
     )

@@ -52,7 +52,7 @@ export class UpdateBodegaStore {
     }
 
     public goBack() {
-        this._navigate('/app/configuration/bodegas')
+        this._navigate('/app/configuracion/bodegas')
     }
 
     public get bodega(): IBodega {
