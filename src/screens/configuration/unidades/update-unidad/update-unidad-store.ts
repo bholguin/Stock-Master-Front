@@ -52,7 +52,7 @@ export class UpdateUnidadStore {
     }
 
     public goBack() {
-        this._navigate('/app/configuration/unidades')
+        this._navigate('/app/configuracion/unidades')
     }
 
     public get unidad(): IUnidadMedida {

@@ -17,6 +17,7 @@ const pages = ['Configuracion', 'Productos', 'Inventario'];
 
 type Props = {
     nombre: string
+    goToPerfil: () => void
 }
 
 export const Header: FC<Props> = (props) => {
@@ -171,13 +172,13 @@ export const Header: FC<Props> = (props) => {
                                 },
                             }}
                         >
-                            <MenuItem onClick={handleCloseUserMenu}>
+                            <MenuItem>
                                 <Styled.Name variant='h4'>
                                     {props?.nombre}
                                 </Styled.Name>
                             </MenuItem>
                             <Divider />
-                            <MenuItem onClick={handleCloseUserMenu}>
+                            <MenuItem onClick={props.goToPerfil}>
                                 <ListItemIcon>
                                     <Person fontSize="small" />
                                 </ListItemIcon>

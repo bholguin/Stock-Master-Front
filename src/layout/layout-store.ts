@@ -22,6 +22,10 @@ export class LayoutStore {
         private readonly _navigate: NavigateFunction
     ) { }
 
+    public goToPerfil() {
+        this._navigate('app/perfil')
+    }
+
     public get name(): string {
         return `${this._usuario.value?.nombre} ${this._usuario.value?.apellido}`
     }

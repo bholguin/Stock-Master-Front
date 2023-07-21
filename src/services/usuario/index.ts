@@ -3,10 +3,13 @@ import { AxiosApi } from "config/axios";
 import { trackPromise } from "react-promise-tracker";
 
 export interface IUsuario {
-    apellido: string
-    id: number
-    nombre: string
-    username: string
+    apellido: string;
+    id: number;
+    nombre: string;
+    username: string;
+    telefono: string;
+    identificacion: string;
+    correo: string;
 }
 
 @autobind
