@@ -6,6 +6,7 @@ import { Configuration } from "screens/configuration";
 
 const Perfil = lazy(() => import("../screens/perfil/perfil"))
 const CuentaPage = lazy(() => import("../pages/perfil/cuenta/cuenta-page"))
+const SeguridadPage = lazy(() => import("../pages/perfil/seguridad/seguridad-page"))
 const LoginPage = lazy(() => import("../pages/login/login-page/login-page"))
 const ValidateUsernamePage = lazy(() => import("../pages/login/validate-username-page/validate-username-page"))
 const ValidateLoginPage = lazy(() => import("../pages/login/validate-login-page/validate-login-page"))
@@ -38,7 +39,8 @@ export const AppRoutes: FC = () => {
             <Route path="/app" element={<Layout store={store} />}>
                 <Route index element={<HomePage />}></Route>
                 <Route path="perfil" element={<Perfil />}>
-                    <Route index element={<CuentaPage />} />
+                    <Route path="cuenta" element={<CuentaPage />} />
+                    <Route path="seguridad" element={<SeguridadPage />} />
                 </Route>
                 <Route path="configuracion" element={<Configuration />}>
                     <Route path="empresas" element={<EmpresasPage />} />

@@ -23,7 +23,7 @@ export class LayoutStore {
     ) { }
 
     public goToPerfil() {
-        this._navigate('app/perfil')
+        this._navigate('app/perfil/cuenta')
     }
 
     public get name(): string {
