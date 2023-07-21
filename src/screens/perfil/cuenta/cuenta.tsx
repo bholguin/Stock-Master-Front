@@ -14,26 +14,27 @@ export const Cuenta: FC<Props> = observer((props) => {
     const {
         control,
         handleSubmit,
-        isValid
+        isValid,
+        submit
     } = useCuenta(props.store)
     return (
         <Styled.Content>
             <HeaderModule
                 title="Cuenta"
             />
-            <Styled.Form onSubmit={handleSubmit(() => { })}>
-            <InputTextForm
-                        control={control}
-                        name="username"
-                        inputProps={{
-                            label: "Username",
-                            fullWidth: true,
-                            disabled: true
-                        }}
-                        rules={{
-                            required: 'campo requerido'
-                        }}
-                    />
+            <Styled.Form onSubmit={handleSubmit(submit)}>
+                <InputTextForm
+                    control={control}
+                    name="username"
+                    inputProps={{
+                        label: "Username",
+                        fullWidth: true,
+                        disabled: true
+                    }}
+                    rules={{
+                        required: 'campo requerido'
+                    }}
+                />
                 <Styled.FullName>
                     <InputTextForm
                         control={control}

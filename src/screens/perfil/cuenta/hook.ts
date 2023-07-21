@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
 import { IUsuario } from "services/usuario"
 import { CuentaStore } from "./cuenta-store"
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 
 export const useCuenta = (store: CuentaStore) => {
     const { control, reset, handleSubmit, formState: { isValid } } = useForm<IUsuario>({
@@ -16,6 +16,10 @@ export const useCuenta = (store: CuentaStore) => {
         }
     })
 
+    const submit = useCallback((data: IUsuario) => {
+        store.putCuenta.run(data)
+    }, [store.putCuenta])
+
     useEffect(() => {
         store.getCuenta.run()
     }, [store.getCuenta])
@@ -28,7 +32,8 @@ export const useCuenta = (store: CuentaStore) => {
                 correo: store.cuenta.correo ?? "",
                 identificacion: store.cuenta.identificacion ?? "",
                 telefono: store.cuenta.telefono ?? "",
-                username: store.cuenta.username ?? ""
+                username: store.cuenta.username ?? "",
+                id: store.cuenta.id
             })
         }
     }, [reset, store.cuenta])
@@ -37,5 +42,6 @@ export const useCuenta = (store: CuentaStore) => {
         control,
         handleSubmit,
         isValid,
+        submit
     }
 }

@@ -31,4 +31,14 @@ export class UsuarioServices {
             })
         )
     }
+
+    public put_usuario(data: IUsuario) {
+        return trackPromise(
+            AxiosApi({
+                method: 'put',
+                url: '/usuario',
+                data
+            })
+        )
+    }
 }

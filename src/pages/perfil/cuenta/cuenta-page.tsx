@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react"
+import { FC, useEffect, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import { Cuenta, CuentaStore } from "screens/perfil/cuenta"
 import { UsuarioServices } from "services/usuario"
@@ -10,6 +10,13 @@ const CuentaPage: FC = () => {
         usuario,
         navigate
     ), [navigate, usuario]);
+
+    useEffect(() => {
+        return () => {
+          (store.dispose)();
+        };
+      });
+    
 
     return(
         <Cuenta store={store} /> 

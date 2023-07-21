@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { styled, Divider } from "@mui/material";
 import { ButtonApp } from "components/Button/Button"
 
 export namespace Styled {
@@ -25,10 +25,7 @@ export namespace Styled {
         width: '150px'
     })
 
-    export const FullName = styled('div')(({theme}) => ({
-        display: 'flex',
-        flexDirection: 'row',
-        gap: theme.spacing(2),
-        width: '100%'
+    export const DividerStyled = styled(Divider)(({theme}) => ({
+        marginTop: theme.spacing(2)
     }))
 }
