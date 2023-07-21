@@ -9,6 +9,10 @@ export const useCuenta = (store: CuentaStore) => {
         defaultValues: {
             nombre: '',
             apellido: '',
+            username: '',
+            correo: '',
+            telefono: '',
+            identificacion: ''
         }
     })
 
@@ -23,7 +27,8 @@ export const useCuenta = (store: CuentaStore) => {
                 apellido: store.cuenta.apellido ?? "",
                 correo: store.cuenta.correo ?? "",
                 identificacion: store.cuenta.identificacion ?? "",
-                telefono: store.cuenta.telefono ?? ""
+                telefono: store.cuenta.telefono ?? "",
+                username: store.cuenta.username ?? ""
             })
         }
     }, [reset, store.cuenta])

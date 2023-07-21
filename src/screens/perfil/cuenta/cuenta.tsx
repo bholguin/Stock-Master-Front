@@ -22,6 +22,18 @@ export const Cuenta: FC<Props> = observer((props) => {
                 title="Cuenta"
             />
             <Styled.Form onSubmit={handleSubmit(() => { })}>
+            <InputTextForm
+                        control={control}
+                        name="username"
+                        inputProps={{
+                            label: "Username",
+                            fullWidth: true,
+                            disabled: true
+                        }}
+                        rules={{
+                            required: 'campo requerido'
+                        }}
+                    />
                 <Styled.FullName>
                     <InputTextForm
                         control={control}
@@ -47,7 +59,6 @@ export const Cuenta: FC<Props> = observer((props) => {
                         }}
                     />
                 </Styled.FullName>
-
                 <InputTextForm
                     control={control}
                     name="identificacion"
