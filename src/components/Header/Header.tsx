@@ -26,8 +26,6 @@ export const Header: FC<Props> = (props) => {
 
     const location = useLocation();
     const activeLink = location.pathname.split('/');
-
-    console.log(activeLink);
     
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);

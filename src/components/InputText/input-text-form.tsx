@@ -18,8 +18,6 @@ export function InputTextForm<T extends FieldValues>(props: Props<T>) {
                 name={name}
                 rules={rules}
                 render={({ field, formState }) => {
-                    console.log(formState.errors[field.name]?.message);
-
                     return <InputText
                         {...inputProps}
                         error={!!formState.errors[field.name]}

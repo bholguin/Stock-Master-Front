@@ -39,6 +39,12 @@ export const Vehiculos: FC<Props> = observer((props) => {
                                 {item.placa}
                             </StyledBodyTable.StyledTableCell>
                             <StyledBodyTable.StyledTableCell>
+                                {item.marca}
+                            </StyledBodyTable.StyledTableCell>
+                            <StyledBodyTable.StyledTableCell>
+                                {item.modelo}
+                            </StyledBodyTable.StyledTableCell>
+                            <StyledBodyTable.StyledTableCell>
                                 {item.descripcion}
                             </StyledBodyTable.StyledTableCell>
                             <StyledBodyTable.StyledTableCell>

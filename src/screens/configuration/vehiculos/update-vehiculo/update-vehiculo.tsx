@@ -19,7 +19,9 @@ export const UpdateVehiculo: FC<Props> = observer((props) => {
         mode: 'onChange',
         defaultValues: {
             descripcion: '',
-            placa: ''
+            placa: '',
+            marca: '',
+            modelo: ''
         }
     })
 
@@ -57,7 +59,22 @@ export const UpdateVehiculo: FC<Props> = observer((props) => {
                             required: 'Campo requerido'
                         }}
                     />
-
+                    <InputTextForm
+                        control={control}
+                        name="marca"
+                        inputProps={{
+                            label: 'Marca',
+                            fullWidth: true
+                        }}
+                    />
+                    <InputTextForm
+                        control={control}
+                        name="modelo"
+                        inputProps={{
+                            label: 'Modelo',
+                            fullWidth: true
+                        }}
+                    />
                     <InputTextForm
                         control={control}
                         name="descripcion"

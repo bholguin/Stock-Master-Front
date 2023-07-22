@@ -24,6 +24,14 @@ export class VeiculosStore {
       label: 'Placa',
     },
     {
+      id: 'marca',
+      label: 'Marca',
+    },
+    {
+      id: 'modelo',
+      label: 'Modelo',
+    },
+    {
       id: 'descripcion',
       label: 'Descripcion',
     },

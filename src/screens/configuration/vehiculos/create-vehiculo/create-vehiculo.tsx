@@ -17,14 +17,16 @@ export const CreateVehiculo: FC<Props> = observer((props) => {
 
     const { control, handleSubmit, formState: { isValid } } = useForm<IVehiculo>({
         mode: 'onChange',
-        defaultValues:{
+        defaultValues: {
             descripcion: '',
-            placa: ''
+            placa: '',
+            marca: '',
+            modelo: ''
         }
     })
 
     const submit = useCallback((data: IVehiculo) => {
-       store.postVehiculos.run(data)  
+        store.postVehiculos.run(data)
     }, [store.postVehiculos])
 
     return (
@@ -49,7 +51,22 @@ export const CreateVehiculo: FC<Props> = observer((props) => {
                             required: 'Campo requerido'
                         }}
                     />
-
+                    <InputTextForm
+                        control={control}
+                        name="marca"
+                        inputProps={{
+                            label: 'Marca',
+                            fullWidth: true
+                        }}
+                    />
+                    <InputTextForm
+                        control={control}
+                        name="modelo"
+                        inputProps={{
+                            label: 'Modelo',
+                            fullWidth: true
+                        }}
+                    />
                     <InputTextForm
                         control={control}
                         name="descripcion"

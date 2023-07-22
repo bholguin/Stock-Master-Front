@@ -6,6 +6,8 @@ export interface IVehiculo {
     placa: string
     id: number
     descripcion: string
+    marca: string
+    modelo: string
 }
 @autobind
 export class VehiculosServices {
