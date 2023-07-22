@@ -19,4 +19,13 @@ export class AuthServices {
             })
         )
     }
+
+    public logout() {
+        return trackPromise(
+            AxiosApi({
+                method: 'put',
+                url: '/logout'
+            })
+        )
+    }
 }

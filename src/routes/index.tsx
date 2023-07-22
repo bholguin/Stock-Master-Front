@@ -3,6 +3,7 @@ import { FC, lazy, useMemo } from "react";
 import { Layout, LayoutStore } from "layout";
 import { UsuarioServices } from "services/usuario";
 import { Configuration } from "screens/configuration";
+import { AuthServices } from "services/auth";
 
 const Perfil = lazy(() => import("../screens/perfil/perfil"))
 const CuentaPage = lazy(() => import("../pages/perfil/cuenta/cuenta-page"))
@@ -26,10 +27,12 @@ const UpdateBodegaPage = lazy(() => import("../pages/configuration/bodegas/updat
 export const AppRoutes: FC = () => {
     const navigate = useNavigate()
     const usuarios = useMemo(() => new UsuarioServices(), [])
+    const auth = useMemo(() => new AuthServices(), [])
     const store = useMemo(() => new LayoutStore(
         usuarios,
+        auth,
         navigate
-    ), [usuarios, navigate])
+    ), [usuarios, navigate, auth])
     return (
         <Routes>
             <Route path="/" element={<LoginPage />}>

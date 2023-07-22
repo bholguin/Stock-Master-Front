@@ -18,6 +18,7 @@ const pages = ['Configuracion', 'Productos', 'Inventario'];
 type Props = {
     nombre: string
     goToPerfil: () => void
+    logout: () => void
 }
 
 export const Header: FC<Props> = (props) => {
@@ -182,7 +183,7 @@ export const Header: FC<Props> = (props) => {
                                 </ListItemIcon>
                                 Perfil
                             </MenuItem>
-                            <MenuItem onClick={handleCloseUserMenu}>
+                            <MenuItem onClick={props.logout}>
                                 <ListItemIcon>
                                     <Logout fontSize="small" />
                                 </ListItemIcon>

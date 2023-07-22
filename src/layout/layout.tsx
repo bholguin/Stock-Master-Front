@@ -21,6 +21,7 @@ export const Layout: FC<Props> = observer((props) => {
             <Header
                 nombre={props.store.name}
                 goToPerfil={props.store.goToPerfil}
+                logout={() => props.store.logout.run()}
             />
             <Outlet />
         </Styled.Content>
