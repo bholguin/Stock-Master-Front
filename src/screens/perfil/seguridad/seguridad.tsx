@@ -1,45 +1,40 @@
-import { FC, useState } from "react"
+import { FC } from "react"
 import { SeguridadStore } from "./seguridad-store"
 import { Styled } from './styles'
 import { HeaderModule } from "components/HeaderModule"
 import { InputTextForm } from "components/InputText"
-import { useForm } from "react-hook-form"
 import PasswordStrengthBar from 'react-password-strength-bar';
 import { IconButton, InputAdornment } from "@mui/material"
 import { Visibility, VisibilityOff } from "@mui/icons-material"
-
-export type Form = {
-    password: string
-    newPassword: string
-    validatePassword: string
-}
+import { observer } from "mobx-react"
+import { useSeguridad } from "./hook"
 
 type Props = {
     store: SeguridadStore
 }
 
-export const Seguridad: FC<Props> = (props) => {
-    const { control, handleSubmit, watch, formState: { isValid } } = useForm<Form>({
-        mode: 'onChange'
-    })
-
-    const [showPass, setShowPass] = useState<boolean>(false)
-    const [showPass2, setShowPass2] = useState<boolean>(false)
-
-    const form = watch();
+export const Seguridad: FC<Props> = observer((props) => {
+    const {
+        control,
+        form,
+        submit,
+        showPass,
+        setShowPass,
+        showPass2,
+        setShowPass2,
+        handleSubmit,
+        isValid
+    } = useSeguridad(props.store)
 
     return (
         <Styled.Content>
             <HeaderModule
                 title="Seguridad"
             />
-            <Styled.Form onSubmit={handleSubmit(() => { })}>
+            <Styled.Form onSubmit={handleSubmit(submit)}>
                 <InputTextForm
                     control={control}
                     name="password"
-                    rules={{
-                        required: "Campo requerido"
-                    }}
                     inputProps={{
                         label: "Password",
                         type: showPass ? 'text' : 'password',
@@ -60,9 +55,6 @@ export const Seguridad: FC<Props> = (props) => {
                 <InputTextForm
                     control={control}
                     name="newPassword"
-                    rules={{
-                        required: "Campo requerido"
-                    }}
                     inputProps={{
                         label: "Nuevo Password",
                         type: showPass2 ? 'text' : 'password',
@@ -94,9 +86,6 @@ export const Seguridad: FC<Props> = (props) => {
                 <InputTextForm
                     control={control}
                     name="validatePassword"
-                    rules={{
-                        required: "Campo requerido"
-                    }}
                     inputProps={{
                         label: "Repetir Password",
                         type: showPass2 ? 'text' : 'password',
@@ -137,4 +126,4 @@ export const Seguridad: FC<Props> = (props) => {
             </Styled.Form>
         </Styled.Content>
     )
-}
+})

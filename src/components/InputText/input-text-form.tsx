@@ -17,16 +17,20 @@ export function InputTextForm<T extends FieldValues>(props: Props<T>) {
                 control={control}
                 name={name}
                 rules={rules}
-                render={({ field }) => (
-                    <InputText
+                render={({ field, formState }) => {
+                    console.log(formState.errors[field.name]?.message);
+
+                    return <InputText
                         {...inputProps}
+                        error={!!formState.errors[field.name]}
                         value={field.value}
+                        helperText={formState?.errors[field.name]?.message as string}
                         onChange={(event) => {
                             inputProps?.onChange && inputProps.onChange(event)
                             field.onChange(event)
                         }}
                     />
-                )}
+                }}
             />
         </>
     )

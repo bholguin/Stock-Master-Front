@@ -12,6 +12,12 @@ export interface IUsuario {
     correo: string;
 }
 
+export type ChangePassword = {
+    password: string
+    newPassword: string
+    validatePassword: string
+}
+
 @autobind
 export class UsuarioServices {
     public get_usuarios() {
@@ -37,6 +43,16 @@ export class UsuarioServices {
             AxiosApi({
                 method: 'put',
                 url: '/usuario',
+                data
+            })
+        )
+    }
+
+    public change_password(data: ChangePassword) {
+        return trackPromise(
+            AxiosApi({
+                method: 'put',
+                url: '/usuario/change-password',
                 data
             })
         )
