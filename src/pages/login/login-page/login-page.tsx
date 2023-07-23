@@ -10,7 +10,7 @@ const LoginPage: FC = () => {
         validate,
         navigate
     ), [validate, navigate])
-
+    
     return (
         <Login store={store}/>
     )

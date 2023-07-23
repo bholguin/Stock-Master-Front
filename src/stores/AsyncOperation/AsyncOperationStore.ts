@@ -40,8 +40,6 @@ export class AsyncOperationStore<TParams, TResult = void> implements IAsyncOpera
           })
         }
       }
-    } finally {
-      this._status.idle();
     }
   }
 

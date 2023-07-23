@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react"
+import { FC, useEffect, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import { Seguridad, SeguridadStore } from "screens/perfil/seguridad"
 import { UsuarioServices } from "services/usuario"
@@ -10,6 +10,11 @@ const SeguridadPage: FC = () => {
         usuario,
         navigate
     ), [usuario, navigate])
+    useEffect(() => {
+        return () => {
+          (store.dispose)();
+        };
+      });
     return(
         <Seguridad store={store}/>
     )

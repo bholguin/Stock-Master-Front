@@ -9,10 +9,15 @@ export class LoginScreenStore {
     public readonly testToken = new AsyncOperationStore(
         this._navigate,
         async () => {
-            /* const response = await this._validatorService.test_token()
-            if (response.data) {
-                this._navigate('/app')
-            } */
+            try{
+                const response = await this._validatorService.test_token()
+                if (response.data) {
+                    this._navigate('/app')
+                }
+            }catch(e){
+
+            }
+            
         }
     )
 

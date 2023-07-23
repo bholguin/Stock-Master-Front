@@ -14,7 +14,7 @@ export const Login: FC<Props> = observer((props) => {
       props.store.testToken.run()
     }, [props.store.testToken])
 
-    return (
+    return props.store.testToken.status.isDone && (
         <Styled.Content>
             <Styled.PaperStyled elevation={24}>
                 <Styled.LogoStyled />

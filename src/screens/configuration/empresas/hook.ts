@@ -28,7 +28,7 @@ export const useEmpresas = (store: EmpresasStore) => {
                 nombre: store.empresa.nombre,
                 telefono: store.empresa.telefono ?? "",
                 direccion: store.empresa.direccion ?? "",
-                nit: store.empresa.nit
+                nit: store.empresa.nit ?? ""
             })
         }
     }, [reset, store.empresa])

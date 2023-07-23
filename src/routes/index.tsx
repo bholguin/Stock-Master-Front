@@ -1,5 +1,5 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { FC, lazy, useMemo } from "react";
+import { FC, lazy, useEffect, useMemo } from "react";
 import { Layout, LayoutStore } from "layout";
 import { UsuarioServices } from "services/usuario";
 import { Configuration } from "screens/configuration";
@@ -33,6 +33,11 @@ export const AppRoutes: FC = () => {
         auth,
         navigate
     ), [usuarios, navigate, auth])
+    useEffect(() => {
+        return () => {
+          (store.dispose)();
+        };
+      });
     return (
         <Routes>
             <Route path="/" element={<LoginPage />}>

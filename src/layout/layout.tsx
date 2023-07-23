@@ -16,7 +16,7 @@ export const Layout: FC<Props> = observer((props) => {
         props.store.getUsuario.run()
     }, [props.store.getUsuario])
 
-    return (
+    return props.store.getUsuario.status.isDone && (
         <Styled.Content>
             <Header
                 nombre={props.store.name}
