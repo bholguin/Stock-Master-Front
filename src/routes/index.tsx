@@ -14,6 +14,8 @@ const ValidateLoginPage = lazy(() => import("../pages/login/validate-login-page/
 const HomePage = lazy(() => import("../pages/home/home-page"))
 const EmpresasPage = lazy(() => import("../pages/configuration/empresas/empresas-page"))
 const UsuariosPage = lazy(() => import("../pages/configuration/usuarios/usuarios-page"))
+const CreateUsuarioPage = lazy(() => import("../pages/configuration/usuarios/create-usuario-page"))
+const UpdateUsuarioPage = lazy(() => import("../pages/configuration/usuarios/update-usuario-page"))
 const VehiculosPage = lazy(() => import("../pages/configuration/vehiculos/vehiculos-page"))
 const CreateVehiculosPage = lazy(() => import("../pages/configuration/vehiculos/create-vehiculo-page"))
 const UpdateVehiculosPage = lazy(() => import("../pages/configuration/vehiculos/update-vehiculo-page"))
@@ -35,9 +37,9 @@ export const AppRoutes: FC = () => {
     ), [usuarios, navigate, auth])
     useEffect(() => {
         return () => {
-          (store.dispose)();
+            (store.dispose)();
         };
-      });
+    });
     return (
         <Routes>
             <Route path="/" element={<LoginPage />}>
@@ -52,7 +54,10 @@ export const AppRoutes: FC = () => {
                 </Route>
                 <Route path="configuracion" element={<Configuration />}>
                     <Route path="empresas" element={<EmpresasPage />} />
-                    <Route path="usuarios" element={<UsuariosPage />} />
+                    <Route path="usuarios" element={<UsuariosPage />} >
+                        <Route path="create" element={<CreateUsuarioPage />} />
+                        <Route path=":usuario_id" element={<UpdateUsuarioPage />} />
+                    </Route>
                     <Route path="vehiculos" element={<VehiculosPage />} >
                         <Route path="create" element={<CreateVehiculosPage />} />
                         <Route path=":vehiculo_id" element={<UpdateVehiculosPage />} />

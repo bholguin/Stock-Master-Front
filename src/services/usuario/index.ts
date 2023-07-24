@@ -33,7 +33,7 @@ export class UsuarioServices {
         return trackPromise(
             AxiosApi({
                 method: 'get',
-                url: '/usuario'
+                url: '/usuario',
             })
         )
     }
@@ -54,6 +54,28 @@ export class UsuarioServices {
                 method: 'put',
                 url: '/usuario/change-password',
                 data
+            })
+        )
+    }
+
+    public post_usuario(data: IUsuario){
+        return trackPromise(
+            AxiosApi({
+                method: 'post',
+                url: '/usuario',
+                data
+            })
+        )
+    }
+
+    public get_usuario(id: string) {
+        return trackPromise(
+            AxiosApi({
+                method: 'get',
+                url: '/usuario',
+                params: {
+                    usuario_id: id
+                }
             })
         )
     }
