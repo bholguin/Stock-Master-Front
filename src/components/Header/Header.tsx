@@ -5,7 +5,6 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Styled } from './styles'
@@ -17,17 +16,21 @@ const pages = ['Configuracion', 'Productos', 'Inventario'];
 
 type Props = {
     nombre: string
+    empresa: string
     goToPerfil: () => void
     logout: () => void
 }
 
 export const Header: FC<Props> = (props) => {
+
+    const {empresa} = props;
+
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
     const location = useLocation();
     const activeLink = location.pathname.split('/');
-    
+
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -110,17 +113,20 @@ export const Header: FC<Props> = (props) => {
                             ))}
                         </Menu>
                     </Box>
-                    <Styled.LogoStyled />
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Styled.LogoContent>
+                        <Styled.LogoStyled />
+                        {`( ${empresa} )`}
+                    </Styled.LogoContent>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end', marginRight: '3rem', gap: '1rem' } }}>
                         {pages.map((page) => (
-                            <Button
+                            <Styled.ButtonStyled
                                 key={page}
                                 onClick={handleCloseNavMenu}
-                                variant={activeLink.includes(page.toLocaleLowerCase()) ? 'outlined': 'text'}
-                                sx={{ my: 1, color: !activeLink.includes(page.toLocaleLowerCase()) && 'white',  display: 'block' }}
+                                variant={activeLink.includes(page.toLocaleLowerCase()) ? 'outlined' : 'text'}
+                                sx={{ my: 1, color: !activeLink.includes(page.toLocaleLowerCase()) && 'white', display: 'block' }}
                             >
                                 {page}
-                            </Button>
+                            </Styled.ButtonStyled>
                         ))}
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>

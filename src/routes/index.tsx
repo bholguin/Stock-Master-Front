@@ -5,6 +5,7 @@ import { UsuarioServices } from "services/usuario";
 import { Configuration } from "screens/configuration";
 import { AuthServices } from "services/auth";
 import { Page404 } from "components/Page404";
+import { EmpresaServices } from "services/empresa";
 
 const Perfil = lazy(() => import("../screens/perfil/perfil"))
 const CuentaPage = lazy(() => import("../pages/perfil/cuenta/cuenta-page"))
@@ -31,11 +32,13 @@ export const AppRoutes: FC = () => {
     const navigate = useNavigate()
     const usuarios = useMemo(() => new UsuarioServices(), [])
     const auth = useMemo(() => new AuthServices(), [])
+    const empresa = useMemo(() => new EmpresaServices(), [])
     const store = useMemo(() => new LayoutStore(
         usuarios,
         auth,
+        empresa,
         navigate
-    ), [usuarios, navigate, auth])
+    ), [usuarios, navigate, auth, empresa])
     useEffect(() => {
         return () => {
             (store.dispose)();

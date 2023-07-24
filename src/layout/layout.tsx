@@ -13,12 +13,13 @@ type Props = {
 export const Layout: FC<Props> = observer((props) => {
     useAxiosConfig()
     useEffect(() => {
-        props.store.getUsuario.run()
-    }, [props.store.getUsuario])
+        props.store.init.run()
+    }, [props.store.init])
 
     return props.store.getUsuario.status.isDone && (
         <Styled.Content>
             <Header
+                empresa={props.store.empresaName}
                 nombre={props.store.name}
                 goToPerfil={props.store.goToPerfil}
                 logout={() => props.store.logout.run()}
