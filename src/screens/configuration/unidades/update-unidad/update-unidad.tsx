@@ -43,7 +43,7 @@ export const UpdateUnidad: FC<Props> = observer((props) => {
         >
             <Styled.Form onSubmit={handleSubmit(submit)}>
                 <Styled.DialogTitleStyled>
-                    Editar Vehiculo
+                    Editar Unidad
                     <Styled.CloseIconStyled onClick={store.goBack} />
                 </Styled.DialogTitleStyled>
                 <Styled.DialogContentStyled>
