@@ -7,7 +7,8 @@ export namespace Styled {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'fixed',
+        position: 'absolute',
+        top: '0',
         zIndex: '50000',
         backgroundColor: 'rgba(255, 255, 255, 0.5)'
     })
