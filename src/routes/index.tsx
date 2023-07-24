@@ -4,6 +4,7 @@ import { Layout, LayoutStore } from "layout";
 import { UsuarioServices } from "services/usuario";
 import { Configuration } from "screens/configuration";
 import { AuthServices } from "services/auth";
+import { Page404 } from "components/Page404";
 
 const Perfil = lazy(() => import("../screens/perfil/perfil"))
 const CuentaPage = lazy(() => import("../pages/perfil/cuenta/cuenta-page"))
@@ -72,6 +73,10 @@ export const AppRoutes: FC = () => {
                     </Route>
                 </Route>
             </Route>
+            <Route
+                path="*"
+                element={<Page404 />}
+            />
         </Routes>
     )
 };
