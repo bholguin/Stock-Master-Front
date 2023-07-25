@@ -35,6 +35,10 @@ export class DetalleProductoStore {
             label: 'Referencia',
         },
         {
+            id: 'unidad',
+            label: 'Unidad',
+        },
+        {
             id: 'descripcion',
             label: 'Descripcion',
         },

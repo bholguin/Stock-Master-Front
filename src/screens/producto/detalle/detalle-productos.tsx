@@ -19,7 +19,7 @@ export const DetalleProducto: FC<Props> = observer((props) => {
     useEffect(() => {
         store.getProductos.run()
     }, [store.getProductos])
-    
+
     return (
         <Styled.Content>
             <Outlet />
@@ -41,6 +41,9 @@ export const DetalleProducto: FC<Props> = observer((props) => {
                             </StyledBodyTable.StyledTableCell>
                             <StyledBodyTable.StyledTableCell>
                                 {item.referencia}
+                            </StyledBodyTable.StyledTableCell>
+                            <StyledBodyTable.StyledTableCell>
+                                {item.unidad.nombre}
                             </StyledBodyTable.StyledTableCell>
                             <StyledBodyTable.StyledTableCell>
                                 {item.descripcion}
