@@ -27,7 +27,10 @@ export const Vehiculos: FC<Props> = observer((props) => {
             <Outlet />
             <HeaderModule
                 title="Vehiculos"
-                createFunction={store.goToCreate}
+                buttonProps={{
+                    createFunction: store.goToCreate,
+                    label: 'Crear Vehiculo'
+                }}
             />
             <EnhancedTable
                 store={store.tableStore}

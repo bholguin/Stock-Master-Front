@@ -27,7 +27,10 @@ export const UnidadesMedidas: FC<Props> = observer((props) => {
             <Outlet />
             <HeaderModule
                 title="Unidades de Medida"
-                createFunction={store.goToCreate}
+                buttonProps={{
+                    createFunction: store.goToCreate,
+                    label: 'Crear Unidad'
+                }}
             />
             <EnhancedTable
                 store={store.tableStore}

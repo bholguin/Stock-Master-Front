@@ -1,24 +1,31 @@
+import { ButtonApp } from "components/Button/Button";
 import { Styled } from "./styles"
 import { FC } from "react";
 
 type Props = {
     title: string;
-    createFunction?: () => void
+    buttonProps?: {
+        label: string,
+        createFunction: () => void
+    }
+   
 }
 
 export const HeaderModule: FC<Props> = (props) => {
-    const { title, createFunction } = props;
+    const { title, buttonProps } = props;
     return (
         <Styled.Content>
             <Styled.Title variant="h2">
                 {title}
             </Styled.Title>
-            {createFunction &&
-                <Styled.FabStyled
-                    onClick={createFunction}
+            {buttonProps &&
+                <ButtonApp
+                    variant="contained"
+                    onClick={buttonProps.createFunction}
+                    endIcon={<Styled.AddStyled />}
                 >
-                    <Styled.AddStyled />
-                </Styled.FabStyled>
+                    {buttonProps.label}
+                </ButtonApp>
             }
         </Styled.Content>
     )

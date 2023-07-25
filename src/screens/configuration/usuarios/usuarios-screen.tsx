@@ -25,7 +25,10 @@ export const Usuarios: FC<Props> = observer((props) => {
             <Outlet />
             <HeaderModule
                 title="Usuarios"
-                createFunction={store.goToCreate}
+                buttonProps={{
+                    createFunction: store.goToCreate,
+                    label: 'Crear Usuario'
+                }}
             />
             <EnhancedTable
                 store={store.tableStore}
