@@ -1,12 +1,15 @@
 import autobind from "autobind-decorator";
+import { SelectItem } from "components/SelectComponent/SelectComponent.interfaces";
 import { reaction } from "mobx";
 import { NavigateFunction } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ProductosService } from "services/productos";
-import { IUnidadMedida } from "services/unidades_medidas";
+import { IUnidadMedida, UnidadesMedidasServices } from "services/unidades_medidas";
+import { ArrayStore } from "stores/ArrayStore";
 import { AsyncOperationStore } from "stores/AsyncOperation";
 import { DisposableStore } from "stores/Dispose";
 import { VisibilityStore } from "stores/Visibility";
+import { From } from "./create-producto";
 
 @autobind
 export class CreateProductoStore {
@@ -14,23 +17,44 @@ export class CreateProductoStore {
 
     private readonly _disposer = new DisposableStore();
 
-    public readonly postUnidad = new AsyncOperationStore(
+    private readonly _unidades = new ArrayStore<SelectItem>([]);
+
+    public readonly getUnidades = new AsyncOperationStore(
         this._navigate,
-        async (data: IUnidadMedida) => {
-           // await this._unidadesServices.post_unidad(data)
+        async () => {
+            const response = await this._unidadesServices.get_unidades()
+            this._unidades.setItems(
+                response.data.map((item: IUnidadMedida) => ({
+                    label: item.nombre,
+                    value: item.id
+                }))
+            )
+        }
+    )
+
+    public readonly postProducto = new AsyncOperationStore(
+        this._navigate,
+        async (data: From) => {
+            await this._productosServices.post_producto({
+                nombre: data.nombre,
+                descripcion: data.descripcion,
+                referencia: data.referencia,
+                unidad_id: data.unidad_from.value,
+            })
         }
     )
 
     constructor(
         private readonly _productosServices: ProductosService,
+        private readonly _unidadesServices: UnidadesMedidasServices,
         private readonly _navigate: NavigateFunction
-    ){
+    ) {
         this._disposer.push(
             reaction(
-                () => this.postUnidad.status.isDone,
+                () => this.postProducto.status.isDone,
                 (status) => {
                     if (status) {
-                        toast('La unidad se creo con exito.', {
+                        toast('El producto se creo con exito.', {
                             type: 'success'
                         })
                         this.goBack()
@@ -40,11 +64,15 @@ export class CreateProductoStore {
         )
     }
 
-    public goBack(){
-        this._navigate('/app/productos')
+    public goBack() {
+        this._navigate('/app/productos/details')
     }
 
     public async dispose(): Promise<void> {
         await this._disposer.dispose();
-      }
+    }
+
+    public get unidades():Array<SelectItem> {
+        return this._unidades.items
+    }
 }

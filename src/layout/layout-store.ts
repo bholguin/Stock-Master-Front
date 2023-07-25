@@ -78,7 +78,7 @@ export class LayoutStore {
     }
 
     public goToProduct(){
-        this._navigate('app/productos')
+        this._navigate('app/productos/details')
     }
 
     public get name(): string {

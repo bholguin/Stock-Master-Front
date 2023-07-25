@@ -3,7 +3,7 @@ import { AxiosApi } from "config/axios";
 import { trackPromise } from "react-promise-tracker";
 export interface IUnidadMedida {
     nombre: string;
-    id: number;
+    id?: string;
     descripcion: string;
     prefijo: string;
     empresa_id: number
@@ -30,7 +30,7 @@ export class UnidadesMedidasServices {
         )
     }
 
-    public delete_unidad(id: number) {
+    public delete_unidad(id: string) {
         return trackPromise(
             AxiosApi({
                 method: 'delete',

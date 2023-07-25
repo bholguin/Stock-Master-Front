@@ -5,12 +5,20 @@ import { IUnidadMedida } from "services/unidades_medidas";
 
 export interface IProducto {
     descripcion: string
-    id: number
+    id: string
     nombre: string
     referencia: string;
     unidad: IUnidadMedida
 }
 
+
+export interface IProductoReq {
+    descripcion: string
+    id?: string
+    nombre: string
+    referencia: string;
+    unidad_id: string
+}
 @autobind
 export class ProductosService {
     public get_productos() {
@@ -18,6 +26,16 @@ export class ProductosService {
             AxiosApi({
                 method: 'get',
                 url: '/productos'
+            })
+        )
+    }
+
+    public post_producto(data: IProductoReq) {
+        return trackPromise(
+            AxiosApi({
+                method: 'post',
+                url: '/producto',
+                data
             })
         )
     }

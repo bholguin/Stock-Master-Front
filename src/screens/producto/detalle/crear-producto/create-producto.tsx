@@ -1,32 +1,45 @@
-import { FC, useCallback } from "react"
+import { FC, useCallback, useEffect } from "react"
 import { CreateProductoStore } from "./create-producto-store"
 import { Styled } from "../styles"
 import { ButtonApp } from "components/Button/Button"
 import { useForm } from "react-hook-form"
 import { InputTextForm } from "components/InputText"
 import { observer } from "mobx-react"
-import { IUnidadMedida } from "services/unidades_medidas"
+import { IProducto } from "services/productos"
+import { SelectComponentForm } from "components/SelectComponent"
+import { SelectItem } from "components/SelectComponent/SelectComponent.interfaces"
 
 type Props = {
     store: CreateProductoStore
+}
+
+export interface From extends IProducto {
+    unidad_from: SelectItem
 }
 
 export const CreateProducto: FC<Props> = observer((props) => {
 
     const { store } = props
 
-    const { control, handleSubmit, formState: { isValid } } = useForm<IUnidadMedida>({
+    const { control, handleSubmit, formState: { isValid } } = useForm<From>({
         mode: 'onChange',
-        defaultValues:{
+        defaultValues: {
             descripcion: '',
             nombre: '',
-            prefijo: ''
+            referencia: '',
+            unidad: null
         }
     })
 
-    const submit = useCallback((data: IUnidadMedida) => {
-       store.postUnidad.run(data)  
-    }, [store.postUnidad])
+    const submit = useCallback((data: From) => {
+        console.log(data);
+
+        store.postProducto.run(data)
+    }, [store.postProducto])
+
+    useEffect(() => {
+        store.getUnidades.run()
+    }, [store.getUnidades])
 
     return (
         <Styled.DialogStyled
@@ -52,11 +65,20 @@ export const CreateProducto: FC<Props> = observer((props) => {
                     />
                     <InputTextForm
                         control={control}
-                        name="prefijo"
+                        name="referencia"
                         inputProps={{
-                            label: 'Prefijo',
+                            label: 'Referencia',
                             fullWidth: true
                         }}
+                        rules={{
+                            required: 'Campo requerido'
+                        }}
+                    />
+                    <SelectComponentForm
+                        control={control}
+                        name="unidad_from"
+                        options={store.unidades}
+                        label="Unidad"
                         rules={{
                             required: 'Campo requerido'
                         }}

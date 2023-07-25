@@ -47,7 +47,7 @@ export class UnidadesMedidasStore {
 
   public readonly deleteUnidad = new AsyncOperationStore(
     this._navigate,
-    async (id: number) => {
+    async (id: string) => {
       await this._unidadesServices.delete_unidad(id)
     }
   )
@@ -87,7 +87,7 @@ export class UnidadesMedidasStore {
     this._navigate('create')
   }
 
-  public goToUpdate(id: number) {
+  public goToUpdate(id: string) {
     this._navigate(`${id}`)
   }
 
