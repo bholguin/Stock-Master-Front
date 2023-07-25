@@ -30,6 +30,8 @@ const CreateBodegaPage = lazy(() => import("../pages/configuration/bodegas/creat
 const UpdateBodegaPage = lazy(() => import("../pages/configuration/bodegas/update-bodega-page"))
 
 const ProductoPage = lazy(() => import("../pages/producto/producto-page/producto-page"))
+const CreateProductoPage = lazy(() => import("../pages/producto/producto-page/create-producto-page"))
+
 
 export const AppRoutes: FC = () => {
     const navigate = useNavigate()
@@ -60,7 +62,9 @@ export const AppRoutes: FC = () => {
                     <Route path="seguridad" element={<SeguridadPage />} />
                 </Route>
                 <Route path="productos" element={<Producto />}>
-                    <Route index element={<ProductoPage />} />
+                    <Route path="details" element={<ProductoPage />}>
+                        <Route path="create" element={<CreateProductoPage />}/>
+                    </Route>
                 </Route>
                 <Route path="configuracion" element={<Configuration />}>
                     <Route path="empresas" element={<EmpresasPage />} />

@@ -68,13 +68,17 @@ export class DetalleProductoStore {
         )
     }
 
+    public goToCreate() {
+        this._navigate('create')
+    }
+
     public get productos(): Array<IProducto> {
         return this._productos.items
     }
 
 
-  public async dispose(): Promise<void> {
-    await this._disposer.dispose();
-    await this.tableStore.dispose();
-  }
+    public async dispose(): Promise<void> {
+        await this._disposer.dispose();
+        await this.tableStore.dispose();
+    }
 }

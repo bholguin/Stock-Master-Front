@@ -26,7 +26,7 @@ export const DetalleProducto: FC<Props> = observer((props) => {
             <HeaderModule
                 title=""
                 buttonProps={{
-                    createFunction: () => {},
+                    createFunction: store.goToCreate,
                     label: 'Crear Producto'
                 }}
             />
@@ -43,7 +43,7 @@ export const DetalleProducto: FC<Props> = observer((props) => {
                                 {item.referencia}
                             </StyledBodyTable.StyledTableCell>
                             <StyledBodyTable.StyledTableCell>
-                                {item.unidad.nombre}
+                                {item?.unidad?.nombre}
                             </StyledBodyTable.StyledTableCell>
                             <StyledBodyTable.StyledTableCell>
                                 {item.descripcion}

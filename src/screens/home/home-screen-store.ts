@@ -14,6 +14,6 @@ export class HomeStore {
     }
 
     public goToProductos() {
-        this._navigate('productos')
+        this._navigate('productos/details')
     }
 }
