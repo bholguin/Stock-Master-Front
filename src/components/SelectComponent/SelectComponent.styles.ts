@@ -5,10 +5,7 @@ export namespace Styled {
   export const AutocompleteStyled = styled(Autocomplete)({
     'width': '100%',
     '& .MuiInputBase-root': {
-      'padding': '0',
-      '& .MuiAutocomplete-input': {
-        'padding': '0',
-      },
+      'paddingBottom': '0.5rem',
     },
   });
 }

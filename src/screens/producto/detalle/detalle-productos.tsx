@@ -51,7 +51,7 @@ export const DetalleProducto: FC<Props> = observer((props) => {
                             <StyledBodyTable.StyledTableCell>
                                 <TableActions
                                     update={() => {}}
-                                    remove={() => {}}
+                                    remove={() => store.deleteProducto.run(item.id)}
                                 />
                             </StyledBodyTable.StyledTableCell>
                         </StyledBodyTable.StyledTableRow>

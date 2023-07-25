@@ -3,6 +3,7 @@ import { EnhancedTableStore } from "components/TableFront";
 import { HeadCell } from "components/TableFront/Head";
 import { reaction } from "mobx";
 import { NavigateFunction } from "react-router-dom";
+import { toast } from "react-toastify";
 import { IProducto, ProductosService } from "services/productos";
 import { ArrayStore } from "stores/ArrayStore";
 import { AsyncOperationStore } from "stores/AsyncOperation";
@@ -22,6 +23,13 @@ export class DetalleProductoStore {
         async () => {
             const response = await this._productoService.get_productos()
             this._productos.setItems(response.data)
+        }
+    )
+
+    public readonly deleteProducto =  new AsyncOperationStore(
+        this._navigate,
+        async (id: string ) => {
+            await this._productoService.delete_producto(id)
         }
     )
 
@@ -65,6 +73,17 @@ export class DetalleProductoStore {
                     }
                 },
             ),
+            reaction(
+                () => this.deleteProducto.status.isDone,
+                (status) => {
+                  if (status) {
+                    toast('El producto se elimino con exito.', {
+                      type: 'success'
+                    })
+                    this.getProductos.run()
+                  }
+                }
+              )
         )
     }
 

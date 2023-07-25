@@ -39,4 +39,38 @@ export class ProductosService {
             })
         )
     }
+
+    public delete_producto(id: string) {
+        return trackPromise(
+            AxiosApi({
+                method: 'delete',
+                url: '/producto',
+                params: {
+                    producto_id: id
+                }
+            })
+        )
+    }
+
+    public put_producto(data: IProductoReq) {
+        return trackPromise(
+            AxiosApi({
+                method: 'put',
+                url: '/producto',
+                data
+            })
+        )
+    }
+
+    public get_producto(id: string) {
+        return trackPromise(
+            AxiosApi({
+                method: 'get',
+                url: '/producto',
+                params: {
+                    producto_id: id
+                }
+            })
+        )
+    }
 }
