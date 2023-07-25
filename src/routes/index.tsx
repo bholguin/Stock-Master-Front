@@ -3,6 +3,7 @@ import { FC, lazy, useEffect, useMemo } from "react";
 import { Layout, LayoutStore } from "layout";
 import { UsuarioServices } from "services/usuario";
 import { Configuration } from "screens/configuration";
+import {Producto} from "screens/producto"
 import { AuthServices } from "services/auth";
 import { Page404 } from "components/Page404";
 import { EmpresaServices } from "services/empresa";
@@ -27,6 +28,8 @@ const UpdateUnidadPage = lazy(() => import("../pages/configuration/unidades/upda
 const BodegasPage = lazy(() => import("../pages/configuration/bodegas/bodegas-page"))
 const CreateBodegaPage = lazy(() => import("../pages/configuration/bodegas/create-bodega-page"))
 const UpdateBodegaPage = lazy(() => import("../pages/configuration/bodegas/update-bodega-page"))
+
+const ProductoPage = lazy(() => import("../pages/producto/producto-page/producto-page"))
 
 export const AppRoutes: FC = () => {
     const navigate = useNavigate()
@@ -55,6 +58,9 @@ export const AppRoutes: FC = () => {
                 <Route path="perfil" element={<Perfil />}>
                     <Route path="cuenta" element={<CuentaPage />} />
                     <Route path="seguridad" element={<SeguridadPage />} />
+                </Route>
+                <Route path="productos" element={<Producto />}>
+                    <Route index element={<ProductoPage />} />
                 </Route>
                 <Route path="configuracion" element={<Configuration />}>
                     <Route path="empresas" element={<EmpresasPage />} />

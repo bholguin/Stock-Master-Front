@@ -12,4 +12,8 @@ export class HomeStore {
     public goToConfig() {
         this._navigate('configuracion/empresas')
     }
+
+    public goToProductos() {
+        this._navigate('productos')
+    }
 }

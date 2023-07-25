@@ -20,7 +20,10 @@ export const Home: FC<Props> = (props) => {
                     </Styled.Title>
                 </Styled.CardContentStyled>
             </Styled.CardStyled>
-            <Styled.CardStyled variant="contained">
+            <Styled.CardStyled
+                variant="contained"
+                onClick={props.store.goToProductos}
+            >
                 <Styled.CardContentStyled>
                     <Styled.ShoppingCartCheckoutIconStyled />
                     <Styled.Title variant="h3">

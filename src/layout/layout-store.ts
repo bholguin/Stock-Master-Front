@@ -73,6 +73,14 @@ export class LayoutStore {
         this._navigate('app/perfil/cuenta')
     }
 
+    public goToConfig(){
+        this._navigate('app/configuracion/empresas')
+    }
+
+    public goToProduct(){
+        this._navigate('app/productos')
+    }
+
     public get name(): string {
         return `${this._usuario.value?.nombre} ${this._usuario.value?.apellido}`
     }

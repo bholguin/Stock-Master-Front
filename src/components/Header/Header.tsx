@@ -16,14 +16,16 @@ const pages = ['Configuracion', 'Productos', 'Inventario'];
 
 type Props = {
     nombre: string
-    empresa: string
+    empresa: string;
+    goToConfig: () => void
+    goToProduct: () => void;
     goToPerfil: () => void
     logout: () => void
 }
 
 export const Header: FC<Props> = (props) => {
 
-    const {empresa} = props;
+    const { empresa, goToConfig, goToProduct } = props;
 
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -45,6 +47,18 @@ export const Header: FC<Props> = (props) => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    const ButtonMenu: FC<{page: string, redirect: () => void}> = (props) => {
+        return (
+            <Styled.ButtonStyled
+                onClick={props.redirect}
+                variant={activeLink.includes(props.page.toLocaleLowerCase()) ? 'outlined' : 'text'}
+                sx={{ my: 1, color: !activeLink.includes(props.page.toLocaleLowerCase()) && 'white', display: 'block' }}
+            >
+                {props.page}
+            </Styled.ButtonStyled>
+        )
+    }
 
     return (
         <Styled.AppBarStyled position="fixed">
@@ -118,16 +132,9 @@ export const Header: FC<Props> = (props) => {
                         {`( ${empresa} )`}
                     </Styled.LogoContent>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end', marginRight: '3rem', gap: '1rem' } }}>
-                        {pages.map((page) => (
-                            <Styled.ButtonStyled
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                variant={activeLink.includes(page.toLocaleLowerCase()) ? 'outlined' : 'text'}
-                                sx={{ my: 1, color: !activeLink.includes(page.toLocaleLowerCase()) && 'white', display: 'block' }}
-                            >
-                                {page}
-                            </Styled.ButtonStyled>
-                        ))}
+                        <ButtonMenu page={"Configuracion"}  redirect={goToConfig}/>
+                        <ButtonMenu page={"Productos"}  redirect={goToProduct}/>
+                        <ButtonMenu page={"Inventario"}  redirect={() => {}}/>
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open options">

@@ -23,6 +23,8 @@ export const Layout: FC<Props> = observer((props) => {
                 nombre={props.store.name}
                 goToPerfil={props.store.goToPerfil}
                 logout={() => props.store.logout.run()}
+                goToConfig={props.store.goToConfig}
+                goToProduct={props.store.goToProduct}
             />
             <Outlet />
         </Styled.Content>
