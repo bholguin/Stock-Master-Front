@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect } from "react"
-import { CreateProductoStore } from "./create-producto-store"
+import { UpdateProductoStore } from "./update-producto-store"
 import { Styled } from "../styles"
 import { ButtonApp } from "components/Button/Button"
 import { useForm } from "react-hook-form"
@@ -10,18 +10,18 @@ import { SelectComponentForm } from "components/SelectComponent"
 import { SelectItem } from "components/SelectComponent/SelectComponent.interfaces"
 
 type Props = {
-    store: CreateProductoStore
+    store: UpdateProductoStore
 }
 
 export interface From extends IProducto {
     unidad_from: SelectItem
 }
 
-export const CreateProducto: FC<Props> = observer((props) => {
+export const UpdateProducto: FC<Props> = observer((props) => {
 
     const { store } = props
 
-    const { control, handleSubmit, formState: { isValid } } = useForm<From>({
+    const { control, handleSubmit, reset, formState: { isValid } } = useForm<From>({
         mode: 'onChange',
         defaultValues: {
             descripcion: '',
@@ -32,12 +32,25 @@ export const CreateProducto: FC<Props> = observer((props) => {
     })
 
     const submit = useCallback((data: From) => {
-        store.postProducto.run(data)
-    }, [store.postProducto])
+        store.putProducto.run(data)
+    }, [store.putProducto])
 
     useEffect(() => {
-        store.getUnidades.run()
-    }, [store.getUnidades])
+        store.init.run()
+    }, [store.init])
+
+    useEffect(() => {
+        if(store.producto){
+            reset({
+                id: store.producto.id,
+                descripcion: store.producto.descripcion,
+                nombre: store.producto.nombre,
+                referencia: store.producto.referencia,
+                unidad_from: store.unidades.find((item) => (item.value === store.producto.unidad.id))
+            })
+        }
+    }, [store.producto, reset, store.unidades])
+
 
     return (
         <Styled.DialogStyled
@@ -46,7 +59,7 @@ export const CreateProducto: FC<Props> = observer((props) => {
         >
             <Styled.Form onSubmit={handleSubmit(submit)}>
                 <Styled.DialogTitleStyled>
-                    Crear Producto
+                    Editar Producto
                     <Styled.CloseIconStyled onClick={store.goBack} />
                 </Styled.DialogTitleStyled>
                 <Styled.DialogContentStyled>

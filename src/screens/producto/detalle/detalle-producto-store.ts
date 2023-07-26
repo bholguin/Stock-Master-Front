@@ -91,6 +91,10 @@ export class DetalleProductoStore {
         this._navigate('create')
     }
 
+    public goToUpdate(id: string) {
+        this._navigate(`${id}`)
+    }
+
     public get productos(): Array<IProducto> {
         return this._productos.items
     }
