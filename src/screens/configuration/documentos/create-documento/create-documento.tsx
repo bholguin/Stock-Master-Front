@@ -22,6 +22,7 @@ export const CreateDocumento: FC<Props> = observer((props) => {
             descripcion: '',
             nombre: '',
             prefijo: '',
+            consecutivo: 0,
             submodulo: null
         }
     })
@@ -70,9 +71,25 @@ export const CreateDocumento: FC<Props> = observer((props) => {
                     <SelectComponentForm
                         control={control}
                         name="submodulo"
-                        label="Submodulos"
+                        label="Submodulo"
                         groupBy={(item) => item.group}
                         options={store.submodulos}
+                        rules={{
+                            required: 'Campo requerido'
+                        }}
+                    />
+                    <InputTextForm
+                        control={control}
+                        name="consecutivo"
+                        inputProps={{
+                            label: 'Consecutivo',
+                            fullWidth: true,
+                            disabled: true,
+                            type: 'number'
+                        }}
+                        rules={{
+                            required: 'Campo requerido'
+                        }}
                     />
                     <InputTextForm
                         control={control}

@@ -3,7 +3,6 @@ import { EnhancedTableStore } from "components/TableFront";
 import { HeadCell } from "components/TableFront/Head";
 import { reaction } from "mobx";
 import { NavigateFunction } from "react-router-dom";
-import { toast } from "react-toastify";
 import { ITipoDocumento, TipoDocumentoServices } from "services/tipos-documento";
 import { ArrayStore } from "stores/ArrayStore";
 import { AsyncOperationStore } from "stores/AsyncOperation";
@@ -32,6 +31,10 @@ export class DocumentoStore {
       label: 'Consecutivo',
     },
     {
+      id: 'submodulo_id',
+      label: 'Submodulo',
+    },
+    {
       id: 'descripcion',
       label: 'Descripcion',
     },
@@ -46,13 +49,6 @@ export class DocumentoStore {
     async () => {
       const response = await this._tipodocServices.get_tipos_documento()
       this._documentos.setItems(response.data)
-    }
-  )
-
-  public readonly deleteVehiculos = new AsyncOperationStore(
-    this._navigate,
-    async (id: number) => {
-     // await this._vehiculosServices.delete_vehiculo(id)
     }
   )
 
@@ -72,17 +68,6 @@ export class DocumentoStore {
             this.tableStore.setList(vehiculos);
           }
         },
-      ),
-      reaction(
-        () => this.deleteVehiculos.status.isDone,
-        (status) => {
-          if (status) {
-            toast('El vehiculo se elimino con exito.', {
-              type: 'success'
-            })
-            this.getTiposDocuento.run()
-          }
-        }
       )
     )
   }

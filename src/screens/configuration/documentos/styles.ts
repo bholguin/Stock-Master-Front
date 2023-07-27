@@ -11,7 +11,7 @@ export namespace Styled {
     export const DialogStyled = styled(Dialog)(() => ({
         '& .MuiPaper-root': {
             'borderRadius': '10px',
-            'minWidth': '35%',
+            'minWidth': '45%',
             'padding': '1rem',
           },
     }))

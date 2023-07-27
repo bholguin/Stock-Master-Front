@@ -25,4 +25,14 @@ export class TipoDocumentoServices {
             })
         );
     }
+
+    public post_tipo_documento(data: ITipoDocumento) {
+        return trackPromise(
+            AxiosApi({
+                method: 'post',
+                url: `/tipo-documento`,
+                data
+            })
+        );
+    }
 }

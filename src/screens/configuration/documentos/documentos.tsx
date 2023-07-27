@@ -48,12 +48,14 @@ export const Documentos: FC<Props> = observer((props) => {
                                 {item.consecutivo}
                             </StyledBodyTable.StyledTableCell>
                             <StyledBodyTable.StyledTableCell>
+                                {item.submodulo_id}
+                            </StyledBodyTable.StyledTableCell>
+                            <StyledBodyTable.StyledTableCell>
                                 {item.descripcion}
                             </StyledBodyTable.StyledTableCell>
                             <StyledBodyTable.StyledTableCell>
                                 <TableActions
                                     update={() => store.goToUpdate(item.id)}
-                                    remove={() => store.deleteVehiculos.run(item.id)}
                                 />
                             </StyledBodyTable.StyledTableCell>
                         </StyledBodyTable.StyledTableRow>

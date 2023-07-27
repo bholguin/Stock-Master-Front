@@ -21,7 +21,10 @@ export class CreateDocumentoStore {
     public readonly postDocumento = new AsyncOperationStore(
         this._navigate,
         async (data: ITipoDocumento) => {
-            //await this._unidadesServices.post_unidad(data)
+            await this._tipodocServices.post_tipo_documento({
+                ...data,
+                submodulo_id: data.submodulo.value
+            })
         }
     )
 
