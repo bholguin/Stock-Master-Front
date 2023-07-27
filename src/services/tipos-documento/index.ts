@@ -35,4 +35,27 @@ export class TipoDocumentoServices {
             })
         );
     }
+
+    public get_tipo_documento(id: string) {
+        return trackPromise(
+            AxiosApi({
+                method: 'get',
+                url: `/tipo-documento`,
+                params: {
+                    tipodoc_id: id
+                }
+            })
+        );
+    }
+
+
+    public put_tipo_documento(data: ITipoDocumento) {
+        return trackPromise(
+            AxiosApi({
+                method: 'put',
+                url: `/tipo-documento`,
+                data
+            })
+        );
+    }
 }

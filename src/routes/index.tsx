@@ -35,6 +35,7 @@ const UpdateProductoPage = lazy(() => import("../pages/producto/producto-page/up
 
 const DocumentosPage = lazy(() => import("../pages/configuration/documentos/documentos-page"))
 const CreateDocumentoPage = lazy(() => import("../pages/configuration/documentos/create-documento-page"))
+const UpdateDocumentoPage = lazy(() => import("../pages/configuration/documentos/update-documento-page"))
 
 export const AppRoutes: FC = () => {
     const navigate = useNavigate()
@@ -90,6 +91,7 @@ export const AppRoutes: FC = () => {
                     </Route>
                     <Route path="documentos" element={<DocumentosPage />}>
                         <Route path="create" element={<CreateDocumentoPage />} />
+                        <Route path=":documento_id" element={<UpdateDocumentoPage />} />
                     </Route>
                 </Route>
             </Route>

@@ -14,7 +14,7 @@ interface ISelectComponentForm extends ISelectComponent {
 }
 
 export const SelectComponentForm: FC<ISelectComponentForm> = (props) => {
-  const {options, control, rules, name, id, placeholder, label, onChange, groupBy, className} = props;
+  const {options, control, rules, name, id, placeholder, label, onChange, groupBy, disabled, className} = props;
 
   const SelectComponentRender = ({field, fieldState, formState}: {
         field: ControllerRenderProps<any, string>;
@@ -27,6 +27,7 @@ export const SelectComponentForm: FC<ISelectComponentForm> = (props) => {
         value={field.value}
         options={options}
         groupBy={groupBy}
+        disabled={disabled}
         getOptionLabel = {(option) => option.label}
         isOptionEqualToValue={(option, value) => option.value === value.value }
         onChange={(event: SyntheticEvent<Element, Event>, value: any, reason: AutocompleteChangeReason, details?: AutocompleteChangeDetails<any>) => {

@@ -15,6 +15,7 @@ export interface ISelectComponent {
     id?: string;
     className?: string;
     label?: string;
+    disabled?: boolean;
     groupBy?: (option: any) => string
     getOptionLabel?: (option: any) => any
     isOptionEqualToValue?: (option: any, value: any) => boolean
