@@ -56,6 +56,7 @@ export const Documentos: FC<Props> = observer((props) => {
                             <StyledBodyTable.StyledTableCell>
                                 <TableActions
                                     update={() => store.goToUpdate(item.id)}
+                                    remove={() => store.deleteTiposDocuento.run(item.id)}
                                 />
                             </StyledBodyTable.StyledTableCell>
                         </StyledBodyTable.StyledTableRow>

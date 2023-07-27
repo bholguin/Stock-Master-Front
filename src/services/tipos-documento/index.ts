@@ -58,4 +58,16 @@ export class TipoDocumentoServices {
             })
         );
     }
+
+    public delete_tipo_documento(id: number) {
+        return trackPromise(
+            AxiosApi({
+                method: 'delete',
+                url: `/tipo-documento`,
+                params: {
+                    tipodoc_id: id
+                }
+            })
+        );
+    }
 }
