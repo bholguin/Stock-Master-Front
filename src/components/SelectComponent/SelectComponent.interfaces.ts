@@ -5,6 +5,7 @@ import {AutocompleteChangeDetails, AutocompleteChangeReason, AutocompleteRenderI
 export type SelectItem = {
   label: string;
   value: string;
+  group?: string
 }
 
 export interface ISelectComponent {
@@ -14,6 +15,7 @@ export interface ISelectComponent {
     id?: string;
     className?: string;
     label?: string;
+    groupBy?: (option: any) => string
     getOptionLabel?: (option: any) => any
     isOptionEqualToValue?: (option: any, value: any) => boolean
     renderInput?: (params: AutocompleteRenderInputParams) => ReactNode

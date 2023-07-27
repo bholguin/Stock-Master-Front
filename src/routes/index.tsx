@@ -3,7 +3,7 @@ import { FC, lazy, useEffect, useMemo } from "react";
 import { Layout, LayoutStore } from "layout";
 import { UsuarioServices } from "services/usuario";
 import { Configuration } from "screens/configuration";
-import {Producto} from "screens/producto"
+import { Producto } from "screens/producto"
 import { AuthServices } from "services/auth";
 import { Page404 } from "components/Page404";
 import { EmpresaServices } from "services/empresa";
@@ -32,6 +32,9 @@ const UpdateBodegaPage = lazy(() => import("../pages/configuration/bodegas/updat
 const ProductoPage = lazy(() => import("../pages/producto/producto-page/producto-page"))
 const CreateProductoPage = lazy(() => import("../pages/producto/producto-page/create-producto-page"))
 const UpdateProductoPage = lazy(() => import("../pages/producto/producto-page/update-producto-page"))
+
+const DocumentosPage = lazy(() => import("../pages/configuration/documentos/documentos-page"))
+const CreateDocumentoPage = lazy(() => import("../pages/configuration/documentos/create-documento-page"))
 
 export const AppRoutes: FC = () => {
     const navigate = useNavigate()
@@ -63,7 +66,7 @@ export const AppRoutes: FC = () => {
                 </Route>
                 <Route path="productos" element={<Producto />}>
                     <Route path="details" element={<ProductoPage />}>
-                        <Route path="create" element={<CreateProductoPage />}/>
+                        <Route path="create" element={<CreateProductoPage />} />
                         <Route path=":producto_id" element={<UpdateProductoPage />} />
                     </Route>
                 </Route>
@@ -84,6 +87,9 @@ export const AppRoutes: FC = () => {
                     <Route path="bodegas" element={<BodegasPage />}>
                         <Route path="create" element={<CreateBodegaPage />} />
                         <Route path=":bodega_id" element={<UpdateBodegaPage />} />
+                    </Route>
+                    <Route path="documentos" element={<DocumentosPage />}>
+                        <Route path="create" element={<CreateDocumentoPage />} />
                     </Route>
                 </Route>
             </Route>

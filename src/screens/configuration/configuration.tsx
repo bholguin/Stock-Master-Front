@@ -24,6 +24,9 @@ export const Configuration: FC = () => {
             },{
                 label: 'Unidades',
                 goTo: 'unidades'
+            },{
+                label: 'Documentos',
+                goTo: 'documentos'
             }]}
         />
     )
