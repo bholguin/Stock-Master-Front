@@ -81,6 +81,10 @@ export class LayoutStore {
         this._navigate('app/productos/details')
     }
 
+    public goToInventario(){
+        this._navigate('app/inventario')
+    }
+
     public get name(): string {
         return `${this._usuario.value?.nombre} ${this._usuario.value?.apellido}`
     }

@@ -4,6 +4,7 @@ import { Layout, LayoutStore } from "layout";
 import { UsuarioServices } from "services/usuario";
 import { Configuration } from "screens/configuration";
 import { Producto } from "screens/producto"
+import { Inventario } from "screens/inventario";
 import { AuthServices } from "services/auth";
 import { Page404 } from "components/Page404";
 import { EmpresaServices } from "services/empresa";
@@ -70,6 +71,9 @@ export const AppRoutes: FC = () => {
                         <Route path="create" element={<CreateProductoPage />} />
                         <Route path=":producto_id" element={<UpdateProductoPage />} />
                     </Route>
+                </Route>
+                <Route path="inventario" element={<Inventario />}>
+
                 </Route>
                 <Route path="configuracion" element={<Configuration />}>
                     <Route path="empresas" element={<EmpresasPage />} />

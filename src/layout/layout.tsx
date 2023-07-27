@@ -25,6 +25,7 @@ export const Layout: FC<Props> = observer((props) => {
                 logout={() => props.store.logout.run()}
                 goToConfig={props.store.goToConfig}
                 goToProduct={props.store.goToProduct}
+                goToInventario={props.store.goToInventario}
             />
             <Outlet />
         </Styled.Content>

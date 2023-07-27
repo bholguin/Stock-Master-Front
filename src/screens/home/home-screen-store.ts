@@ -16,4 +16,8 @@ export class HomeStore {
     public goToProductos() {
         this._navigate('productos/details')
     }
+
+    public goToInventario() {
+        this._navigate('inventario')
+    }
 }

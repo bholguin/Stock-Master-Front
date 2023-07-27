@@ -19,13 +19,14 @@ type Props = {
     empresa: string;
     goToConfig: () => void
     goToProduct: () => void;
+    goToInventario: () => void
     goToPerfil: () => void
     logout: () => void
 }
 
 export const Header: FC<Props> = (props) => {
 
-    const { empresa, goToConfig, goToProduct } = props;
+    const { empresa, goToConfig, goToProduct, goToInventario } = props;
 
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -134,7 +135,7 @@ export const Header: FC<Props> = (props) => {
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end', marginRight: '3rem', gap: '1rem' } }}>
                         <ButtonMenu page={"Configuracion"}  redirect={goToConfig}/>
                         <ButtonMenu page={"Productos"}  redirect={goToProduct}/>
-                        <ButtonMenu page={"Inventario"}  redirect={() => {}}/>
+                        <ButtonMenu page={"Inventario"}  redirect={goToInventario}/>
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open options">
