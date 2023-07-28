@@ -38,6 +38,9 @@ const DocumentosPage = lazy(() => import("../pages/configuration/documentos/docu
 const CreateDocumentoPage = lazy(() => import("../pages/configuration/documentos/create-documento-page"))
 const UpdateDocumentoPage = lazy(() => import("../pages/configuration/documentos/update-documento-page"))
 
+const EntradasPage = lazy(() => import("../pages/inventario/entradas/entragas-page"))
+const CreateEntradasPage = lazy(() => import("../pages/inventario/entradas/create-entrega-page"))
+
 export const AppRoutes: FC = () => {
     const navigate = useNavigate()
     const usuarios = useMemo(() => new UsuarioServices(), [])
@@ -73,7 +76,9 @@ export const AppRoutes: FC = () => {
                     </Route>
                 </Route>
                 <Route path="inventario" element={<Inventario />}>
-
+                    <Route path="entradas" element={<EntradasPage />} >
+                        <Route path="create" element={<CreateEntradasPage />} />
+                    </Route>
                 </Route>
                 <Route path="configuracion" element={<Configuration />}>
                     <Route path="empresas" element={<EmpresasPage />} />

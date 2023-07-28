@@ -18,6 +18,6 @@ export class HomeStore {
     }
 
     public goToInventario() {
-        this._navigate('inventario')
+        this._navigate('inventario/entradas')
     }
 }

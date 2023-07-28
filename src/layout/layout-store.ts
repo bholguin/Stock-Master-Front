@@ -82,7 +82,7 @@ export class LayoutStore {
     }
 
     public goToInventario(){
-        this._navigate('app/inventario')
+        this._navigate('app/inventario/entradas')
     }
 
     public get name(): string {
