@@ -26,6 +26,18 @@ export class TipoDocumentoServices {
         );
     }
 
+    public get_tipos_documento_submodulo(submodulo: string) {
+        return trackPromise(
+            AxiosApi({
+                method: 'get',
+                url: `/tipos-documento`,
+                params:{
+                    submodulo_id: submodulo
+                }
+            })
+        );
+    }
+
     public post_tipo_documento(data: ITipoDocumento) {
         return trackPromise(
             AxiosApi({

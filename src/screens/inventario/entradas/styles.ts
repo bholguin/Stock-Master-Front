@@ -1,4 +1,4 @@
-import { styled, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
+import { styled, Dialog, DialogTitle, DialogContent, DialogActions, Divider } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 export namespace Styled {
@@ -11,7 +11,7 @@ export namespace Styled {
     export const DialogStyled = styled(Dialog)(() => ({
         '& .MuiPaper-root': {
             'borderRadius': '10px',
-            'minWidth': '35%',
+            'minWidth': '60%',
             'padding': '1rem',
           },
     }))
@@ -44,5 +44,22 @@ export namespace Styled {
         fontSize: '3rem',
         margin: theme.spacing(.5),
         cursor: 'pointer'
+    }))
+
+    export const WrapFields = styled('div')(({theme}) => ({
+        display: 'flex',
+        flexDirection: 'row',
+        gap: theme.spacing(2)
+    }))
+
+    export const DividerStyles = styled(Divider)(({theme}) => ({
+        padding: theme.spacing(1),
+        margin: '0'
+    }))
+
+    export const ProductContent = styled('div')(({theme}) => ({
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '0rem 1rem'
     }))
 }

@@ -1,73 +1,129 @@
-import { FC, useCallback } from "react"
+import { FC, useCallback, useEffect } from "react"
 import { CreateEntradaBodegaStore } from "./create-entrada-store"
 import { Styled } from "../styles"
 import { ButtonApp } from "components/Button/Button"
 import { useForm } from "react-hook-form"
-import { InputTextForm } from "components/InputText"
 import { observer } from "mobx-react"
-import { IBodega } from "services/bodegas"
+import { SelectComponentForm } from "components/SelectComponent"
+import { SelectItem } from "components/SelectComponent/SelectComponent.interfaces"
+import { InputTextForm } from "components/InputText"
+import { AddITem } from "components/AddItem"
 
 type Props = {
     store: CreateEntradaBodegaStore
+}
+
+type Form = {
+    bodega: SelectItem
+    tipodoc: SelectItem
+    concepto: string
+    consecutivo: number
 }
 
 export const CreateEntradaBodega: FC<Props> = observer((props) => {
 
     const { store } = props
 
-    const { control, handleSubmit, formState: { isValid } } = useForm<IBodega>({
+    const { control, handleSubmit, reset, setValue, formState: { isValid } } = useForm<Form>({
         mode: 'onChange',
         defaultValues: {
-            descripcion: '',
-            nombre: '',
-            direccion: ''
+            bodega: null,
+            tipodoc: null,
+            concepto: '',
+            consecutivo: 0
         }
     })
 
-    const submit = useCallback((data: IBodega) => {
-        store.postBodega.run(data)
-    }, [store.postBodega])
+    const onChangeTipoDocumento = useCallback((event: any, option: SelectItem) => {
+        const tipodoc = store.tipodoc.find(item => item.id === parseInt(option.value))
+        setValue('consecutivo', (tipodoc.consecutivo + 1))
+    }, [setValue, store.tipodoc])
+
+    const submitProducto = useCallback((data) => {
+        store.productosSelected.add(data)
+    }, [store.productosSelected])
+
+    useEffect(() => {
+        store.init.run()
+    }, [store.init])
+
+    useEffect(() => {
+        reset({
+            consecutivo: store.tipodoc.length === 1 ? (store.tipodoc[0].consecutivo + 1) : 0,
+            bodega: store.bodegas.length === 1 ? store.bodegas[0] : null,
+            tipodoc: store.tiposdocList.length === 1 ? store.tiposdocList[0] : null,
+        })
+    }, [reset, store.bodegas, store.tiposdocList, store.tipodoc])
 
     return (
         <Styled.DialogStyled
             open={store.show.isVisible}
 
         >
-            <Styled.Form onSubmit={handleSubmit(submit)}>
+            <Styled.Form onSubmit={handleSubmit(() => { })}>
                 <Styled.DialogTitleStyled>
                     Crear Entrada
                     <Styled.CloseIconStyled onClick={store.goBack} />
                 </Styled.DialogTitleStyled>
                 <Styled.DialogContentStyled>
-                    <InputTextForm
-                        control={control}
-                        name="nombre"
-                        inputProps={{
-                            label: 'Nombre',
-                            fullWidth: true
-                        }}
-                        rules={{
-                            required: 'Campo requerido'
-                        }}
-                    />
-                    <InputTextForm
-                        control={control}
-                        name="direccion"
-                        inputProps={{
-                            label: 'Direccion',
-                            fullWidth: true
-                        }}
-                    />
-                    <InputTextForm
-                        control={control}
-                        name="descripcion"
-                        inputProps={{
-                            label: 'Descripcion',
-                            fullWidth: true,
-                            multiline: true,
-                            rows: 4
-                        }}
-                    />
+                    <Styled.WrapFields>
+                        <SelectComponentForm
+                            control={control}
+                            name="tipodoc"
+                            options={store.tiposdocList}
+                            label="Tipo de Documento"
+                            onChange={onChangeTipoDocumento}
+                            rules={{
+                                required: 'Campo requerido'
+                            }}
+                        />
+                        <InputTextForm
+                            control={control}
+                            name="consecutivo"
+                            inputProps={{
+                                label: 'Consecutivo',
+                                fullWidth: true,
+                                disabled: true
+                            }}
+                        />
+                    </Styled.WrapFields>
+                    <Styled.WrapFields>
+                        <SelectComponentForm
+                            control={control}
+                            name="bodega"
+                            options={store.bodegas}
+                            label="Bodegas"
+                            rules={{
+                                required: 'Campo requerido'
+                            }}
+                        />
+                        <InputTextForm
+                            control={control}
+                            name="concepto"
+                            inputProps={{
+                                label: 'Concepto',
+                                fullWidth: true
+                            }}
+                        />
+                    </Styled.WrapFields>
+                    <Styled.DividerStyles />
+                    <Styled.ProductContent>
+                        <AddITem
+                            productos={store.productos}
+                            submit={submitProducto}
+                        />
+                        {
+                            store.productosSelected.items.map((item) => {
+                                return (
+                                    <>
+                                        <span>{item.producto.label}</span>
+                                        <span>{item.cantidad}</span>
+                                        <span>{item.producto.group}</span>
+                                    </>
+                                )
+                            })
+                        }
+                    </Styled.ProductContent>
                 </Styled.DialogContentStyled>
                 <Styled.DialogActionsStyled>
                     <ButtonApp

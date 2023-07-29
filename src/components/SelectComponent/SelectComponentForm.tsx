@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {FC, SyntheticEvent} from 'react';
+import {Ref, SyntheticEvent, forwardRef} from 'react';
 import {Control, Controller, ControllerFieldState, ControllerRenderProps, UseFormStateReturn} from 'react-hook-form';
 import {AutocompleteChangeDetails, AutocompleteChangeReason} from '@mui/material';
 import {SelectComponent} from './SelectComponent';
@@ -13,7 +13,7 @@ interface ISelectComponentForm extends ISelectComponent {
     id?: string
 }
 
-export const SelectComponentForm: FC<ISelectComponentForm> = (props) => {
+export const SelectComponentForm = forwardRef((props: ISelectComponentForm, ref: Ref<HTMLDivElement>) => {
   const {options, control, rules, name, id, placeholder, label, onChange, groupBy, disabled, className} = props;
 
   const SelectComponentRender = ({field, fieldState, formState}: {
@@ -21,6 +21,7 @@ export const SelectComponentForm: FC<ISelectComponentForm> = (props) => {
         fieldState: ControllerFieldState;
         formState: UseFormStateReturn<any>;
     }) => {
+
     return (
       <SelectComponent
         id={id}
@@ -38,6 +39,7 @@ export const SelectComponentForm: FC<ISelectComponentForm> = (props) => {
           (params) => <InputText
             {...params}
             label={label}
+            ref={ref}
             className={className}
             placeholder={placeholder}
             helperText={fieldState.error?.message}
@@ -54,4 +56,4 @@ export const SelectComponentForm: FC<ISelectComponentForm> = (props) => {
     rules={rules}
     render={SelectComponentRender}
   />;
-};
+});
