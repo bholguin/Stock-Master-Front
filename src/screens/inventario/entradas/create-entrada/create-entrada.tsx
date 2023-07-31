@@ -16,7 +16,7 @@ type Props = {
     store: CreateEntradaBodegaStore
 }
 
-type Form = {
+export type Form = {
     bodega: SelectItem
     tipodoc: SelectItem
     concepto: string
@@ -52,8 +52,12 @@ export const CreateEntradaBodega: FC<Props> = observer((props) => {
 
     const submitProducto = useCallback((data: FormProd) => {
         append(data)
-        inputRef.current.focus()
     }, [append])
+
+    const submit = useCallback((data: Form) => {
+        console.log(data);
+        store.postEntrada.run(data)
+    }, [store.postEntrada])
 
     useEffect(() => {
         store.init.run()
@@ -72,7 +76,7 @@ export const CreateEntradaBodega: FC<Props> = observer((props) => {
             open={store.show.isVisible}
 
         >
-            <Styled.Form onSubmit={handleSubmit(() => { })}>
+            <Styled.Form onSubmit={handleSubmit(submit)}>
                 <Styled.DialogTitleStyled>
                     Crear Entrada
                     <Styled.CloseIconStyled onClick={store.goBack} />

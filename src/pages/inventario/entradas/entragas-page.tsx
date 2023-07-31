@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react"
+import { FC, useEffect, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import { Entradas } from "screens/inventario/entradas"
 import { EntradasStore } from "screens/inventario/entradas/entrada-store"
@@ -10,7 +10,12 @@ const EntradasPage:FC = () => {
     const store = useMemo(() => new EntradasStore(
         entradas,
         navigate
-    ), [entradas, navigate])
+    ), [entradas, navigate]);
+    useEffect(() => {
+        return () => {
+          (store.dispose)();
+        };
+      });
     return (
         <Entradas store={store} />
     )

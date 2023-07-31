@@ -10,6 +10,8 @@ import { ArrayStore } from "stores/ArrayStore";
 import { AsyncOperationStore } from "stores/AsyncOperation";
 import { DisposableStore } from "stores/Dispose";
 import { VisibilityStore } from "stores/Visibility";
+import { Form } from "./create-entrada";
+import { EntradaServices } from "services/entrada";
 
 @autobind
 export class CreateEntradaBodegaStore {
@@ -77,7 +79,25 @@ export class CreateEntradaBodegaStore {
         }
     )
 
+    public readonly postEntrada = new AsyncOperationStore(
+        this._navigate,
+        async (data: Form) => {
+            const response = await this._entradaService.post_entrada({
+                concepto: data.concepto,
+                consecutivo: data.consecutivo,
+                bodega_id: data.bodega.value,
+                tipodoc_id: data.tipodoc.value,
+                productos: data.productos.map((item) => ({
+                    cantidad: item.cantidad,
+                    producto_id: item.producto.value
+                }))
+            })
+            console.log(response);  
+        }
+    )
+
     constructor(
+        private readonly _entradaService: EntradaServices,
         private readonly _bodegaServices: BodegasServices,
         private readonly _tipodocService: TipoDocumentoServices,
         private readonly _productoService: ProductosService,
@@ -91,6 +111,14 @@ export class CreateEntradaBodegaStore {
                     label: `${item.prefijo} - ${item.nombre}`
                 }))
                 this._tiposdocList.setItems(list)
+            }
+        )
+        reaction(
+            () => this.postEntrada.status.isDone,
+            (status) => {
+                if(status){
+                    this.goBack()
+                }
             }
         )
     }
