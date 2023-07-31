@@ -22,6 +22,7 @@ export function InputTextForm<T extends FieldValues>(props: Props<T>) {
                         {...inputProps}
                         error={!!formState.errors[field.name]}
                         value={field.value}
+                        ref={field.ref}                        
                         helperText={formState?.errors[field.name]?.message as string}
                         onChange={(event) => {
                             inputProps?.onChange && inputProps.onChange(event)

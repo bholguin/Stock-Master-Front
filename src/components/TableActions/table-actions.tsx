@@ -24,12 +24,12 @@ export const TableActions: FC<Props> = (props) => {
                 </Styled.ButtonStyled>
             }
             {remove &&
-                <Styled.ButtonStyled
+                <Styled.ButtonRemoveStyled
                     variant="contained"
                     onClick={remove}
                 >
                     <DeleteIcon />
-                </Styled.ButtonStyled>
+                </Styled.ButtonRemoveStyled>
             }
         </Styled.Content>
     )

@@ -1,13 +1,16 @@
-import { FC, useCallback, useEffect } from "react"
+import { FC, useCallback, useEffect, useRef } from "react"
 import { CreateEntradaBodegaStore } from "./create-entrada-store"
 import { Styled } from "../styles"
 import { ButtonApp } from "components/Button/Button"
-import { useForm } from "react-hook-form"
+import { useFieldArray, useForm } from "react-hook-form"
 import { observer } from "mobx-react"
 import { SelectComponentForm } from "components/SelectComponent"
 import { SelectItem } from "components/SelectComponent/SelectComponent.interfaces"
 import { InputTextForm } from "components/InputText"
-import { AddITem } from "components/AddItem"
+import { AddITem, FormProd } from "components/AddItem"
+import { StyledBodyTable } from "components/Table"
+import { TableActions } from "components/TableActions"
+import { Table, TableBody } from "@mui/material"
 
 type Props = {
     store: CreateEntradaBodegaStore
@@ -18,11 +21,14 @@ type Form = {
     tipodoc: SelectItem
     concepto: string
     consecutivo: number
+    productos: Array<FormProd>
 }
 
 export const CreateEntradaBodega: FC<Props> = observer((props) => {
 
     const { store } = props
+
+    const inputRef = useRef<HTMLInputElement>()
 
     const { control, handleSubmit, reset, setValue, formState: { isValid } } = useForm<Form>({
         mode: 'onChange',
@@ -34,14 +40,20 @@ export const CreateEntradaBodega: FC<Props> = observer((props) => {
         }
     })
 
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: "productos"
+    })
+
     const onChangeTipoDocumento = useCallback((event: any, option: SelectItem) => {
         const tipodoc = store.tipodoc.find(item => item.id === parseInt(option.value))
         setValue('consecutivo', (tipodoc.consecutivo + 1))
     }, [setValue, store.tipodoc])
 
-    const submitProducto = useCallback((data) => {
-        store.productosSelected.add(data)
-    }, [store.productosSelected])
+    const submitProducto = useCallback((data: FormProd) => {
+        append(data)
+        inputRef.current.focus()
+    }, [append])
 
     useEffect(() => {
         store.init.run()
@@ -102,7 +114,7 @@ export const CreateEntradaBodega: FC<Props> = observer((props) => {
                             name="concepto"
                             inputProps={{
                                 label: 'Concepto',
-                                fullWidth: true
+                                fullWidth: true,
                             }}
                         />
                     </Styled.WrapFields>
@@ -111,18 +123,27 @@ export const CreateEntradaBodega: FC<Props> = observer((props) => {
                         <AddITem
                             productos={store.productos}
                             submit={submitProducto}
+                            ref={inputRef}
                         />
-                        {
-                            store.productosSelected.items.map((item) => {
-                                return (
-                                    <>
-                                        <span>{item.producto.label}</span>
-                                        <span>{item.cantidad}</span>
-                                        <span>{item.producto.group}</span>
-                                    </>
-                                )
-                            })
-                        }
+                        <Table>
+                            <TableBody>
+                                {
+                                    fields.map((item, index) => {
+                                        return (
+                                            <StyledBodyTable.StyledTableRow key={`row-table-${item.id}`}>
+                                                <StyledBodyTable.StyledTableCell>{item.producto.label}</StyledBodyTable.StyledTableCell>
+                                                <StyledBodyTable.StyledTableCell>{`${item.cantidad} ${item.producto.group}`}</StyledBodyTable.StyledTableCell>
+                                                <StyledBodyTable.StyledTableCell>
+                                                    <TableActions
+                                                        remove={() => remove(index)}
+                                                    />
+                                                </StyledBodyTable.StyledTableCell>
+                                            </StyledBodyTable.StyledTableRow>
+                                        )
+                                    })
+                                }
+                            </TableBody>
+                        </Table>
                     </Styled.ProductContent>
                 </Styled.DialogContentStyled>
                 <Styled.DialogActionsStyled>

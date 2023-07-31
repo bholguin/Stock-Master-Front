@@ -4,7 +4,7 @@ import { Styled } from "./styles"
 import AddIcon from '@mui/icons-material/Add';
 import { SelectItem } from "components/SelectComponent/SelectComponent.interfaces";
 import { useForm } from "react-hook-form";
-import { FC, useCallback, useRef, useState } from "react";
+import { useCallback, useState, forwardRef, Ref } from "react";
 import { Typography } from "@mui/material";
 
 export type FormProd = {
@@ -17,11 +17,9 @@ type Props = {
     submit: (data: FormProd) => void
 }
 
-export const AddITem: FC<Props> = (props) => {
+export const AddITem = forwardRef((props: Props, ref: Ref<HTMLInputElement>) => {
 
     const { productos, submit } = props
-
-    const productosRef = useRef<HTMLDivElement>()
 
     const [prefijo, setPrefijo] = useState<string>('')
 
@@ -29,7 +27,7 @@ export const AddITem: FC<Props> = (props) => {
         mode: 'onChange',
         defaultValues: {
             producto: null,
-            cantidad: null
+            cantidad: 0
         }
     })
 
@@ -44,7 +42,7 @@ export const AddITem: FC<Props> = (props) => {
             producto: null,
             cantidad: 0
         })
-        productosRef.current.focus()
+        setPrefijo('')
     }, [submit, reset])
 
     return (
@@ -57,7 +55,7 @@ export const AddITem: FC<Props> = (props) => {
                     options={productos}
                     label="Producto"
                     onChange={onChangeProducto}
-                    ref={productosRef}
+                    ref={ref}
                     rules={{
                         required: 'Campo requerido'
                     }}
@@ -91,4 +89,4 @@ export const AddITem: FC<Props> = (props) => {
         </>
 
     )
-}
+})

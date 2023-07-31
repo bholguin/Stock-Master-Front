@@ -27,7 +27,7 @@ export const UpdateProducto: FC<Props> = observer((props) => {
             descripcion: '',
             nombre: '',
             referencia: '',
-            unidad: null
+            unidad_from: null
         }
     })
 

@@ -49,6 +49,7 @@ export namespace Styled {
     export const WrapFields = styled('div')(({theme}) => ({
         display: 'flex',
         flexDirection: 'row',
+        width: '70%',
         gap: theme.spacing(2)
     }))
 
@@ -60,6 +61,7 @@ export namespace Styled {
     export const ProductContent = styled('div')(({theme}) => ({
         display: 'flex',
         flexDirection: 'column',
-        padding: '0rem 1rem'
+        padding: '0rem 1rem',
+        gap: theme.spacing(2)
     }))
 }
