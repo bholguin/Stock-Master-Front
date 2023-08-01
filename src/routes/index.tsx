@@ -42,6 +42,10 @@ const EntradasPage = lazy(() => import("../pages/inventario/entradas/entragas-pa
 const CreateEntradasPage = lazy(() => import("../pages/inventario/entradas/create-entrega-page"))
 const ViewEntradasPage = lazy(() => import("../pages/inventario/entradas/view-entradas-page"))
 
+const SalidasPage = lazy(() => import("../pages/inventario/salidas/salidas-page"))
+const CreateSalidasPage = lazy(() => import("../pages/inventario/salidas/create-salida-page"))
+const ViewSalidasPage = lazy(() => import("../pages/inventario/salidas/view-salida-page"))
+
 export const AppRoutes: FC = () => {
     const navigate = useNavigate()
     const usuarios = useMemo(() => new UsuarioServices(), [])
@@ -80,6 +84,10 @@ export const AppRoutes: FC = () => {
                     <Route path="entradas" element={<EntradasPage />} >
                         <Route path="create" element={<CreateEntradasPage />} />
                         <Route path=":entrada_id" element={<ViewEntradasPage />} />
+                    </Route>
+                    <Route path="salidas" element={<SalidasPage />}>
+                        <Route path="create" element={<CreateSalidasPage />} />
+                        <Route path=":salida_id" element={<ViewSalidasPage />} />
                     </Route>
                 </Route>
                 <Route path="configuracion" element={<Configuration />}>

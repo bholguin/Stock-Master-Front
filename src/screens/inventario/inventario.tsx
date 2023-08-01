@@ -12,6 +12,9 @@ export const Inventario: FC = () => {
             pages={[{
                 label: 'Entradas',
                 goTo: 'entradas'
+            }, {
+                label: 'Salidas',
+                goTo: 'salidas'
             }]}
         />
     )
