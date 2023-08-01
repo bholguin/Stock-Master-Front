@@ -7,6 +7,7 @@ import { observer } from "mobx-react";
 import { EnhancedTable } from "components/TableFront";
 import { StyledBodyTable } from "components/Table";
 import { TableActions } from "components/TableActions";
+import dayjs from "dayjs";
 
 type Props = {
     store: EntradasStore
@@ -39,7 +40,7 @@ export const Entradas: FC<Props> = observer((props) => {
                                 {`${item?.tipodoc?.prefijo} - ${item.consecutivo}`}
                             </StyledBodyTable.StyledTableCell>
                             <StyledBodyTable.StyledTableCell>
-                                {item.creado}
+                                {dayjs(item.creado).format('MMMM D, YYYY')}
                             </StyledBodyTable.StyledTableCell>
                             <StyledBodyTable.StyledTableCell>
                                 {item?.bodega?.nombre}
@@ -49,7 +50,7 @@ export const Entradas: FC<Props> = observer((props) => {
                             </StyledBodyTable.StyledTableCell>
                             <StyledBodyTable.StyledTableCell>
                                 <TableActions
-                                    update={() => {}}
+                                    view={() => store.goToView(item.id)}
                                 />
                             </StyledBodyTable.StyledTableCell>
                         </StyledBodyTable.StyledTableRow>

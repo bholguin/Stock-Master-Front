@@ -1,8 +1,7 @@
-import { FC, useCallback, useEffect, useRef } from "react"
+import { FC, useRef } from "react"
 import { CreateEntradaBodegaStore } from "./create-entrada-store"
 import { Styled } from "../styles"
 import { ButtonApp } from "components/Button/Button"
-import { useFieldArray, useForm } from "react-hook-form"
 import { observer } from "mobx-react"
 import { SelectComponentForm } from "components/SelectComponent"
 import { SelectItem } from "components/SelectComponent/SelectComponent.interfaces"
@@ -11,6 +10,7 @@ import { AddITem, FormProd } from "components/AddItem"
 import { StyledBodyTable } from "components/Table"
 import { TableActions } from "components/TableActions"
 import { Table, TableBody } from "@mui/material"
+import { useCreateEntradaBodega } from "./hook"
 
 type Props = {
     store: CreateEntradaBodegaStore
@@ -30,46 +30,16 @@ export const CreateEntradaBodega: FC<Props> = observer((props) => {
 
     const inputRef = useRef<HTMLInputElement>()
 
-    const { control, handleSubmit, reset, setValue, formState: { isValid } } = useForm<Form>({
-        mode: 'onChange',
-        defaultValues: {
-            bodega: null,
-            tipodoc: null,
-            concepto: '',
-            consecutivo: 0
-        }
-    })
-
-    const { fields, append, remove } = useFieldArray({
+    const {
         control,
-        name: "productos"
-    })
-
-    const onChangeTipoDocumento = useCallback((event: any, option: SelectItem) => {
-        const tipodoc = store.tipodoc.find(item => item.id === parseInt(option.value))
-        setValue('consecutivo', (tipodoc.consecutivo + 1))
-    }, [setValue, store.tipodoc])
-
-    const submitProducto = useCallback((data: FormProd) => {
-        append(data)
-    }, [append])
-
-    const submit = useCallback((data: Form) => {
-        console.log(data);
-        store.postEntrada.run(data)
-    }, [store.postEntrada])
-
-    useEffect(() => {
-        store.init.run()
-    }, [store.init])
-
-    useEffect(() => {
-        reset({
-            consecutivo: store.tipodoc.length === 1 ? (store.tipodoc[0].consecutivo + 1) : 0,
-            bodega: store.bodegas.length === 1 ? store.bodegas[0] : null,
-            tipodoc: store.tiposdocList.length === 1 ? store.tiposdocList[0] : null,
-        })
-    }, [reset, store.bodegas, store.tiposdocList, store.tipodoc])
+        handleSubmit,
+        isValid,
+        fields,
+        remove,
+        submit,
+        onChangeTipoDocumento,
+        submitProducto
+    } = useCreateEntradaBodega(store)
 
     return (
         <Styled.DialogStyled

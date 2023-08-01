@@ -72,6 +72,10 @@ export class EntradasStore {
     this._navigate('create')
   }
 
+  public goToView(id: number) {
+    this._navigate(`${id}`)
+  }
+
   public async dispose(): Promise<void> {
     await this._disposer.dispose();
     await this.tableStore.dispose();

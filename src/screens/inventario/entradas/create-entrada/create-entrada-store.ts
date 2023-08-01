@@ -12,6 +12,7 @@ import { DisposableStore } from "stores/Dispose";
 import { VisibilityStore } from "stores/Visibility";
 import { Form } from "./create-entrada";
 import { EntradaServices } from "services/entrada";
+import { toast } from "react-toastify";
 
 @autobind
 export class CreateEntradaBodegaStore {
@@ -116,7 +117,10 @@ export class CreateEntradaBodegaStore {
         reaction(
             () => this.postEntrada.status.isDone,
             (status) => {
-                if(status){
+                if (status) {
+                    toast('La entrada se creo con exito.', {
+                        type: 'success'
+                    })
                     this.goBack()
                 }
             }

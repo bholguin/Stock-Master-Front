@@ -1,4 +1,4 @@
-import { styled, Dialog, DialogTitle, DialogContent, DialogActions, Divider } from "@mui/material";
+import { styled, Dialog, DialogTitle, DialogContent, DialogActions, Divider, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 export namespace Styled {
@@ -63,5 +63,13 @@ export namespace Styled {
         flexDirection: 'column',
         padding: '0rem 1rem',
         gap: theme.spacing(2)
+    }))
+
+    export const TypographyStyles = styled(Typography)(({theme}) => ({
+        padding: 0
+    }))
+
+    export const DividerViewStyles = styled(Divider)(({theme}) => ({
+        margin: '0'
     }))
 }

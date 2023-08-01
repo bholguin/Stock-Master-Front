@@ -2,6 +2,7 @@ import autobind from "autobind-decorator";
 import { AxiosApi } from "config/axios";
 import { trackPromise } from "react-promise-tracker";
 import { IBodega } from "services/bodegas";
+import { IProducto } from "services/productos";
 import { ITipoDocumento } from "services/tipos-documento";
 
 type entradaReq = {
@@ -24,6 +25,11 @@ export interface IEntrada {
     tipodoc: ITipoDocumento
 }
 
+export interface IItem {
+    producto: IProducto
+    cantidad: number
+}
+
 @autobind
 export class EntradaServices {
     public get_entradas() {
@@ -44,5 +50,29 @@ export class EntradaServices {
                 data
             })
         );
+    }
+
+    public get_entrada(id: string) {
+        return trackPromise(
+            AxiosApi({
+                method: 'get',
+                url: '/entrada',
+                params: {
+                    entrada_id: id
+                }
+            })
+        )
+    }
+
+    public get_entrada_items(id: string) {
+        return trackPromise(
+            AxiosApi({
+                method: 'get',
+                url: '/entrada-items',
+                params: {
+                    entrada_id: id
+                }
+            })
+        )
     }
 }

@@ -40,6 +40,7 @@ const UpdateDocumentoPage = lazy(() => import("../pages/configuration/documentos
 
 const EntradasPage = lazy(() => import("../pages/inventario/entradas/entragas-page"))
 const CreateEntradasPage = lazy(() => import("../pages/inventario/entradas/create-entrega-page"))
+const ViewEntradasPage = lazy(() => import("../pages/inventario/entradas/view-entradas-page"))
 
 export const AppRoutes: FC = () => {
     const navigate = useNavigate()
@@ -78,6 +79,7 @@ export const AppRoutes: FC = () => {
                 <Route path="inventario" element={<Inventario />}>
                     <Route path="entradas" element={<EntradasPage />} >
                         <Route path="create" element={<CreateEntradasPage />} />
+                        <Route path=":entrada_id" element={<ViewEntradasPage />} />
                     </Route>
                 </Route>
                 <Route path="configuracion" element={<Configuration />}>
