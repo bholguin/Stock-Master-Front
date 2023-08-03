@@ -4,8 +4,9 @@ import { ArrayStore } from "stores/ArrayStore";
 import { AsyncOperationStore } from "stores/AsyncOperation";
 import { DisposableStore } from "stores/Dispose";
 import { VisibilityStore } from "stores/Visibility";
-import { EntradaServices, IEntrada, IItem } from "services/entrada";
+import { EntradaServices, IItem } from "services/documento/entrada";
 import { ValueBoxStore } from "stores/ValueBox";
+import { IDocumento } from "services/documento/interface";
 
 @autobind
 export class ViewEntradaBodegaStore {
@@ -13,7 +14,7 @@ export class ViewEntradaBodegaStore {
 
     private readonly _disposer = new DisposableStore();
 
-    private readonly _entrada = new ValueBoxStore<IEntrada>(null)
+    private readonly _entrada = new ValueBoxStore<IDocumento>(null)
 
     private readonly _items = new ArrayStore<IItem>([])
 
@@ -59,7 +60,7 @@ export class ViewEntradaBodegaStore {
         await this._disposer.dispose();
     }
 
-    public get entrada(): IEntrada {
+    public get entrada(): IDocumento {
         return this._entrada.value
     }
 

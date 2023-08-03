@@ -1,9 +1,7 @@
 import autobind from "autobind-decorator";
 import { AxiosApi } from "config/axios";
 import { trackPromise } from "react-promise-tracker";
-import { IBodega } from "services/bodegas";
 import { IProducto } from "services/productos";
-import { ITipoDocumento } from "services/tipos-documento";
 
 type entradaReq = {
     consecutivo: number;
@@ -14,15 +12,6 @@ type entradaReq = {
         cantidad: number;
         producto_id: string
     }>
-}
-
-export interface IEntrada {
-    concepto?: string
-    consecutivo: number
-    creado: string
-    id?: number
-    bodega: IBodega
-    tipodoc: ITipoDocumento
 }
 
 export interface IItem {

@@ -2,7 +2,7 @@ import { FC, useEffect, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import { CreateEntradaBodega, CreateEntradaBodegaStore } from "screens/inventario/entradas/create-entrada"
 import { BodegasServices } from "services/bodegas"
-import { EntradaServices } from "services/entrada"
+import { EntradaServices } from "services/documento/entrada"
 import { ProductosService } from "services/productos"
 import { TipoDocumentoServices } from "services/tipos-documento"
 

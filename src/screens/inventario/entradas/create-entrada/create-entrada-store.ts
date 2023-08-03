@@ -11,7 +11,7 @@ import { AsyncOperationStore } from "stores/AsyncOperation";
 import { DisposableStore } from "stores/Dispose";
 import { VisibilityStore } from "stores/Visibility";
 import { Form } from "./create-entrada";
-import { EntradaServices } from "services/entrada";
+import { EntradaServices } from "services/documento/entrada";
 import { toast } from "react-toastify";
 
 @autobind

@@ -2,7 +2,7 @@ import { FC, useEffect, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import { Salidas } from "screens/inventario/salidas"
 import { SalidasStore } from "screens/inventario/salidas/salidas-store"
-import { SalidasServices } from "services/salida"
+import { SalidasServices } from "services/documento/salida"
 
 const SalidasPage:FC = () => {
     const navigate = useNavigate()

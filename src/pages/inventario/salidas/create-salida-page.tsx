@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { CreateSalidaBodega, CreateSalidaBodegaStore } from "screens/inventario/salidas/create-salida"
 import { BodegasServices } from "services/bodegas"
 import { ProductosService } from "services/productos"
-import { SalidasServices } from "services/salida"
+import { SalidasServices } from "services/documento/salida"
 import { TipoDocumentoServices } from "services/tipos-documento"
 
 const CreatSalidaBodegaPage: FC = () => {

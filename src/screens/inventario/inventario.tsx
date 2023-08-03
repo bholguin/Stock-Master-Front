@@ -15,6 +15,9 @@ export const Inventario: FC = () => {
             }, {
                 label: 'Salidas',
                 goTo: 'salidas'
+            }, {
+                label: "Kardex",
+                goTo: 'kardex'
             }]}
         />
     )

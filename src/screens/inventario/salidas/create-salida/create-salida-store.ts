@@ -12,7 +12,7 @@ import { DisposableStore } from "stores/Dispose";
 import { VisibilityStore } from "stores/Visibility";
 import { Form } from "./create-salida";
 import { toast } from "react-toastify";
-import { SalidasServices } from "services/salida";
+import { SalidasServices } from "services/documento/salida";
 
 @autobind
 export class CreateSalidaBodegaStore {

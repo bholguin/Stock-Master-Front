@@ -46,6 +46,8 @@ const SalidasPage = lazy(() => import("../pages/inventario/salidas/salidas-page"
 const CreateSalidasPage = lazy(() => import("../pages/inventario/salidas/create-salida-page"))
 const ViewSalidasPage = lazy(() => import("../pages/inventario/salidas/view-salida-page"))
 
+const KardexPage = lazy(() => import("../pages/inventario/kardex/kardex-page"))
+
 export const AppRoutes: FC = () => {
     const navigate = useNavigate()
     const usuarios = useMemo(() => new UsuarioServices(), [])
@@ -89,6 +91,7 @@ export const AppRoutes: FC = () => {
                         <Route path="create" element={<CreateSalidasPage />} />
                         <Route path=":salida_id" element={<ViewSalidasPage />} />
                     </Route>
+                    <Route path="kardex" element={<KardexPage />} />
                 </Route>
                 <Route path="configuracion" element={<Configuration />}>
                     <Route path="empresas" element={<EmpresasPage />} />

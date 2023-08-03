@@ -1,7 +1,7 @@
 import { FC, useEffect, useMemo } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { ViewSalidaBodega, ViewSalidaBodegaStore } from "screens/inventario/salidas/view-salida"
-import { SalidasServices } from "services/salida"
+import { SalidasServices } from "services/documento/salida"
 
 const ViewSalidaBodegaPage: FC = () => {
   const navigate = useNavigate()

@@ -3,8 +3,8 @@ import { EnhancedTableStore } from "components/TableFront";
 import { HeadCell } from "components/TableFront/Head";
 import { reaction } from "mobx";
 import { NavigateFunction } from "react-router-dom";
-import { IEntrada } from "services/entrada";
-import { SalidasServices } from "services/salida";
+import { IDocumento } from "services/documento/interface";
+import { SalidasServices } from "services/documento/salida";
 import { ArrayStore } from "stores/ArrayStore";
 import { AsyncOperationStore } from "stores/AsyncOperation";
 import { DisposableStore } from "stores/Dispose";
@@ -12,13 +12,13 @@ import { DisposableStore } from "stores/Dispose";
 @autobind
 export class SalidasStore {
 
-  public readonly tableStore: EnhancedTableStore<IEntrada & { action?: unknown }>;
+  public readonly tableStore: EnhancedTableStore<IDocumento & { action?: unknown }>;
 
-  private readonly _entradas = new ArrayStore<IEntrada>([])
+  private readonly _entradas = new ArrayStore<IDocumento>([])
 
   private readonly _disposer = new DisposableStore();
 
-  private readonly _columns = new ArrayStore<HeadCell<IEntrada & { action?: unknown }>>([
+  private readonly _columns = new ArrayStore<HeadCell<IDocumento & { action?: unknown }>>([
     {
       id: 'tipodoc',
       label: 'Documento',
