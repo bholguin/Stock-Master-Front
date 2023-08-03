@@ -7,6 +7,10 @@ import { observer } from "mobx-react"
 import { Styled } from "./styles"
 import { ButtonApp } from "components/Button/Button"
 import { SelectItem } from "components/SelectComponent/SelectComponent.interfaces"
+import { EnhancedTable } from "components/TableFront"
+import { StyledBodyTable } from "components/Table"
+import dayjs from "dayjs"
+import { Typography } from "@mui/material"
 
 export type Form = {
     producto: SelectItem
@@ -21,8 +25,12 @@ export const Kardex: FC<Props> = observer((props) => {
 
     const { store } = props;
 
-    const { control, handleSubmit, formState: { isValid } } = useForm<Form>({
-        mode: 'onChange'
+    const { control, handleSubmit, reset, formState: { isValid } } = useForm<Form>({
+        mode: 'onChange',
+        defaultValues: {
+            bodega: null,
+            producto: null
+        }
     })
 
     const submit = useCallback((data: Form) => {
@@ -32,6 +40,13 @@ export const Kardex: FC<Props> = observer((props) => {
     useEffect(() => {
         store.init.run()
     }, [store.init])
+
+    useEffect(() => {
+        reset({
+            bodega: store.bodegas.length === 1 ? store.bodegas[0] : null
+        })
+    }, [store.bodegas, reset])
+
     return (
         <Styled.Content>
             <HeaderModule title="Kardex" />
@@ -62,6 +77,40 @@ export const Kardex: FC<Props> = observer((props) => {
                     Consultar
                 </ButtonApp>
             </Styled.Form>
+            <Typography variant="h2">{store?.product?.label}</Typography>
+            {store.tableStore.showRows.length > 0 &&
+                <EnhancedTable
+                    store={store.tableStore}
+                >
+                    {
+                        store.tableStore.showRows.map((item) => (
+                            <StyledBodyTable.StyledTableRow key={`row-table-${item.id}`}>
+                                <StyledBodyTable.StyledTableCell>
+                                    {`${item?.documento.tipodoc?.prefijo} - ${item?.documento?.consecutivo}`}
+                                </StyledBodyTable.StyledTableCell>
+                                <StyledBodyTable.StyledTableCell>
+                                    {dayjs(item.creado).format('MMMM D, YYYY')}
+                                </StyledBodyTable.StyledTableCell>
+                                <StyledBodyTable.StyledTableCell align="right">
+                                    {item.tipo === "E" && item.cantidad}
+                                </StyledBodyTable.StyledTableCell>
+                                <StyledBodyTable.StyledTableCell align="right">
+                                    {item.tipo === "S" && item.cantidad}
+                                </StyledBodyTable.StyledTableCell>
+                            </StyledBodyTable.StyledTableRow>
+                        ))
+                    }
+                    <StyledBodyTable.StyledTableRow >
+                        <StyledBodyTable.StyledTableCell rowSpan={2} />
+                        <StyledBodyTable.StyledTableCell colSpan={2} align="right">
+                            <Styled.TableTypography variant="h3">Saldo</Styled.TableTypography>
+                        </StyledBodyTable.StyledTableCell>
+                        <StyledBodyTable.StyledTableCell align="right">
+                            <Styled.TableTypography variant="h3">{`${store.saldo} ${store?.product?.group}`}</Styled.TableTypography>
+                        </StyledBodyTable.StyledTableCell>
+                    </StyledBodyTable.StyledTableRow >
+                </EnhancedTable>
+            }
 
         </Styled.Content>
     )

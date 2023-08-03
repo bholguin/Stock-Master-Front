@@ -28,6 +28,7 @@ function BaseHeadTable<T>(props: Props<T>): ReactElement {
         {store.heads.map((headCell) => (
           <Styled.TableCellStyled
             key={headCell.label}
+            align={headCell.align}
             sortDirection={store.sort.orderBy === headCell.id ? store.sort.order : false}
           >
             <Styled.TableSortLabelStyled

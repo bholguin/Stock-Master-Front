@@ -7,6 +7,7 @@ export type Order = 'asc' | 'desc';
 export interface HeadCell<T> {
     id: keyof T & {action?: unknown};
     label: string;
+    align?: "center" | "left" | "right" | "justify" | "inherit"
   }
 
 export interface ITableHeadStore<T>{

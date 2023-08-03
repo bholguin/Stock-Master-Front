@@ -52,7 +52,7 @@ export class SalidasStore {
   constructor(
     private readonly _salidasService: SalidasServices,
     private readonly _navigate: NavigateFunction
-  ) { 
+  ) {
     this.tableStore = new EnhancedTableStore(
       this._columns.items,
     );
@@ -66,7 +66,7 @@ export class SalidasStore {
           }
         },
       )
-      )
+    )
   }
 
   public goToCreate() {

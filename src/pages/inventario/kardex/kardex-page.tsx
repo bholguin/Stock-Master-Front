@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+import { useEffect, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import { Kardex, KardexStore } from "screens/inventario/kardex"
 import { BodegasServices } from "services/bodegas"
@@ -17,6 +17,12 @@ const KardexPage = () => {
         movimiento,
         navigate
     ), [bodegas, productos, navigate, movimiento])
+
+    useEffect(() => {
+        return () => {
+          (store.dispose)();
+        };
+      });
 
     return(
         <Kardex store={store}/>
