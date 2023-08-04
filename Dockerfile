@@ -5,7 +5,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 ENV GENERATE_SOURCEMAP false
 WORKDIR /app
 
-ENV REACT_APP_API_URL=http://stock-master-backend.azurewebsites.net/
+ENV REACT_APP_API_URL=http://stock-master-backend.azurewebsites.net/api
 
 # Prepare souces for build
 COPY src ./src
