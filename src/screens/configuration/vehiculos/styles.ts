@@ -5,7 +5,10 @@ export namespace Styled {
     export const Content = styled('div')(({ theme }) => ({
         display: 'flex',
         flexDirection: 'column',
-        gap: theme.spacing(4)
+        gap: theme.spacing(2),
+        [theme.breakpoints.up('lg')]: { 
+            gap: theme.spacing(4),
+        }
     }))
 
     export const DialogStyled = styled(Dialog)(() => ({

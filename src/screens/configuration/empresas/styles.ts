@@ -12,7 +12,10 @@ export namespace Styled {
         display: 'flex',
         flexDirection: 'column',
         gap: theme.spacing(1.5),
-        width: '50%'
+        width: '100%',
+        [theme.breakpoints.up('lg')]: {
+            width: '50%',
+        }
     }))
 
     export const ButtonContent = styled('div')(({theme}) => ({

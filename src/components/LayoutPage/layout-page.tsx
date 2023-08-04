@@ -1,7 +1,9 @@
-import { FC } from "react"
+import { FC, useCallback, useEffect, useState } from "react"
 import { Styled } from "./styles"
 import { Typography } from "@mui/material"
 import { Outlet, useLocation, useNavigate } from "react-router-dom"
+import { SelectItem } from "components/SelectComponent/SelectComponent.interfaces"
+import { SelectComponent } from "components/SelectComponent"
 
 export type PageNavigationItem = {
     label: string;
@@ -24,8 +26,26 @@ export const LayoutPage: FC<Props> = (props) => {
 
     const location = useLocation();
     const navigate = useNavigate()
-    const goTo = (place: string) => navigate(place)
+    const [options, setOptions] = useState<Array<SelectItem>>([])
+    const goTo = useCallback((place: string) => navigate(place), [navigate])
     const activeLink = location.pathname.split('/');
+
+    const onChangeRoute = useCallback((event, value) => {
+        if (value?.value) {
+            goTo(value.value)
+        }
+    }, [goTo])
+
+    useEffect(() => {
+        if (Array.isArray(pages)) {
+            setOptions(
+                pages.map(item => ({
+                    label: item.label,
+                    value: item.goTo
+                }))
+            )
+        }
+    }, [pages])
 
     return (
         <Styled.Content>
@@ -38,6 +58,14 @@ export const LayoutPage: FC<Props> = (props) => {
                         {page}
                     </Typography>
                 </Styled.TitlePage>
+                {options.length > 0 && <Styled.SelectContent>
+                    <SelectComponent
+                        onChange={onChangeRoute}
+                        value={options.find(item => activeLink.includes(item.value)) ?? null}
+                        options={options}
+                        label='Submenu'
+                    />
+                </Styled.SelectContent>}
                 <Styled.PaperStyled elevation={24} square>
                     <Styled.Options>
                         {

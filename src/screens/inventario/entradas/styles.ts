@@ -5,7 +5,10 @@ export namespace Styled {
     export const Content = styled('div')(({ theme }) => ({
         display: 'flex',
         flexDirection: 'column',
-        gap: theme.spacing(4)
+        gap: theme.spacing(2),
+        [theme.breakpoints.up('lg')]: { 
+            gap: theme.spacing(4),
+        }
     }))
 
     export const DialogStyled = styled(Dialog)(() => ({
@@ -48,9 +51,13 @@ export namespace Styled {
 
     export const WrapFields = styled('div')(({theme}) => ({
         display: 'flex',
-        flexDirection: 'row',
-        width: '70%',
-        gap: theme.spacing(2)
+        flexDirection: 'column',
+        width: '100%',
+        gap: theme.spacing(2),
+        [theme.breakpoints.up('lg')]: { 
+            flexDirection: 'row',
+            width: '70%',
+        }
     }))
 
     export const DividerStyles = styled(Divider)(({theme}) => ({
@@ -61,8 +68,11 @@ export namespace Styled {
     export const ProductContent = styled('div')(({theme}) => ({
         display: 'flex',
         flexDirection: 'column',
-        padding: '0rem 1rem',
-        gap: theme.spacing(2)
+        padding: '0rem',
+        gap: theme.spacing(2),
+        [theme.breakpoints.up('lg')]: { 
+            padding: '0rem 1rem',
+        }
     }))
 
     export const TypographyStyles = styled(Typography)(({theme}) => ({

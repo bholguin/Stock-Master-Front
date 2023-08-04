@@ -40,7 +40,6 @@ export const SelectComponentForm = forwardRef((props: ISelectComponentForm, ref:
           (params) => <InputText
             {...params}
             label={label}
-           autoFocus
             className={className}
             placeholder={placeholder}
             helperText={fieldState.error?.message}

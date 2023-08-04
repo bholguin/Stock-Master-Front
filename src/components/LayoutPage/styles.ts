@@ -1,6 +1,5 @@
 import { styled, Paper, Fab } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-
 export namespace Styled {
     export const Content = styled('div')({
         width: '100%',
@@ -23,7 +22,7 @@ export namespace Styled {
         display: 'flex',
         height: '90vh',
         flexDirection: 'column',
-        gap: theme.spacing(1),
+        gap: theme.spacing(2.5),
         padding: theme.spacing(1),
         [theme.breakpoints.up('lg')]: {
             width: '90%',
@@ -34,7 +33,7 @@ export namespace Styled {
         width: '100%',
         height: '90vh',
         position: 'relative',
-        marginTop: theme.spacing(4),
+        marginTop: theme.spacing(0),
         borderRadius: '5px',
         padding: theme.spacing(2),
         [theme.breakpoints.up('lg')]: {
@@ -44,17 +43,14 @@ export namespace Styled {
     }))
 
     export const Options = styled('div')(({ theme }) => ({
-        position: 'absolute',
-        left: '0px',
-        top: '-50px',
-        display: 'flex',
-        flexDirection: 'row',
-        gap: theme.spacing(1),
+        display: 'none',
         [theme.breakpoints.up('lg')]: {
+            position: 'absolute',
             display: 'flex',
             flexDirection: 'column',
             left: '-135px',
             top: '85px',
+            gap: theme.spacing(1)
         }
     }))
 
@@ -91,6 +87,14 @@ export namespace Styled {
         height: '4rem',
         [theme.breakpoints.up('lg')]: {
             position: 'absolute'
+        }
+    }))
+
+
+    export const SelectContent = styled('div')(({theme}) => ({
+        display: 'flex',
+        [theme.breakpoints.up('lg')]: {
+            display: 'none'
         }
     }))
 }
