@@ -32,10 +32,10 @@ export class AsyncOperationStore<TParams, TResult = void> implements IAsyncOpera
     } catch (e) {
       if (e instanceof AxiosError) {
         this._status.fail(e);
-        if (e.response.status === 401) {
+        if (e.response?.status === 401) {
           this._navigate('/')
         } else {
-          toast(`${e.response.status} - ${e.response.data}`, {
+          toast(`${e?.response?.status} - ${e?.response?.data}`, {
             type: 'error'
           })
         }
