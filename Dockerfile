@@ -19,7 +19,7 @@ RUN npm ci
 RUN npm run build
 
 FROM node:18.7.0-alpine3.16 AS release
-LABEL Maintainer="QuickConnect - Volante Technologies"
+LABEL Maintainer="STOCK MASTER"
 WORKDIR /app
 COPY --from=build /app/build /app/build
 RUN npm install --global serve
